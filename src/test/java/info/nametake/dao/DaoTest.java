@@ -23,7 +23,7 @@ public class DaoTest extends BaseDBTest {
 
     @BeforeClass
     public static void createDao() {
-        userDao = DaoManager.createDao(con, User.class);
+        userDao = DaoFacotry.createDao(con, User.class);
     }
 
     @AfterClass
@@ -52,7 +52,7 @@ public class DaoTest extends BaseDBTest {
 
     @Test
     public void testCreateDao() {
-        Dao<User> userDao = DaoManager.createDao(con, User.class);
+        Dao<User> userDao = DaoFacotry.createDao(con, User.class);
         assertThat(userDao, instanceOf(Dao.class));
     }
 
