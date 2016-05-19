@@ -19,7 +19,6 @@ public class DbSetupTest extends BaseDBTest {
      *
      * @throws SQLException
      */
-    @Override
     public void testInsert() throws SQLException {
         // Create insert sql
         String sql = "INSERT INTO USER (NAME, PASS) VALUES('taro', 'taro')";
@@ -39,7 +38,6 @@ public class DbSetupTest extends BaseDBTest {
      *
      * @throws SQLException
      */
-    @Override
     public void testSelect() throws SQLException {
         String sql = "SELECT * FROM USER WHERE ID = 1";
         // Create stmt
@@ -59,7 +57,6 @@ public class DbSetupTest extends BaseDBTest {
      *
      * @throws SQLException
      */
-    @Override
     public void testDelete() throws SQLException {
         // Create delete sql
         String sql = "DELETE FROM USER WHERE ID = 1";
