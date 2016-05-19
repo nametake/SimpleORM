@@ -4,13 +4,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 /**
  * Created by nameki-shogo on 2016/05/19.
  */
-public class DaoManagerTest {
+public class DaoTest {
     @Before
     public void setUp() throws Exception {
 
@@ -22,7 +21,8 @@ public class DaoManagerTest {
     }
 
     @Test
-    public void DAOの実装createDao() throws Exception {
+    public void TestCreateDao() throws Exception {
+
         fail();
     }
 

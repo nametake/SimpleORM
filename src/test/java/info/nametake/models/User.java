@@ -14,5 +14,7 @@ public class User {
     @DatabaseField(columnName = "name")
     private String name;
 
+
+
 }
 
