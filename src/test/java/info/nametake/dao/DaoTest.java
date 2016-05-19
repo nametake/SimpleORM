@@ -1,5 +1,6 @@
 package info.nametake.dao;
 
+import info.nametake.BaseDBTest;
 import info.nametake.exception.AnnotationException;
 import info.nametake.models.NotAnnotationModel;
 import info.nametake.models.User;

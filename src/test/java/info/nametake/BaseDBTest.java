@@ -1,4 +1,4 @@
-package info.nametake.dao;
+package info.nametake;
 
 import com.ninja_squad.dbsetup.destination.Destination;
 import com.ninja_squad.dbsetup.destination.DriverManagerDestination;

@@ -1,7 +1,6 @@
 package info.nametake.dao;
 
-import com.sun.xml.internal.rngom.parse.host.Base;
-import org.junit.Test;
+import info.nametake.BaseDBTest;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
