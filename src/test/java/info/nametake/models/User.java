@@ -14,6 +14,8 @@ public class User {
     @DatabaseField(columnName = "name")
     private String name;
 
+    @DatabaseField(columnName = "password")
+    private String password;
 
 
 }
