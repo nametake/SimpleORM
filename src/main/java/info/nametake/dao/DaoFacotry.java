@@ -1,5 +1,7 @@
 package info.nametake.dao;
 
+import info.nametake.db.DatabaseTable;
+
 import java.sql.Connection;
 
 /**
@@ -7,6 +9,7 @@ import java.sql.Connection;
  */
 public class DaoFacotry {
     public static <D extends Dao<?>, T> D createDao(Connection connection, Class<T> clazz) {
+        DatabaseTable databaseTable = clazz.getAnnotation(DatabaseTable.class);
         return null;
     }
 }
