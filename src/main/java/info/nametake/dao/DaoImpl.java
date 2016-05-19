@@ -1,9 +1,9 @@
 package info.nametake.dao;
 
+import info.nametake.stmt.StatementExecutor;
+
 import java.sql.Connection;
 import java.util.List;
-
-import static javafx.scene.input.KeyCode.T;
 
 /**
  * Created by shogo on 2016/05/19.
@@ -12,10 +12,12 @@ public class DaoImpl<T> implements Dao<T> {
 
     private final Connection connection;
     private final Class<T> clazz;
+    private final StatementExecutor statementExecutor;
 
     public DaoImpl(Connection connection, Class<T> clazz) {
         this.connection = connection;
         this.clazz = clazz;
+        this.statementExecutor = null;
     }
 
     public List<T> select(T data) {
