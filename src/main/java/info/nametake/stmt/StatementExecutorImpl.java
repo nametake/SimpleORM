@@ -1,4 +1,4 @@
-package info.nametake.dao;
+package info.nametake.stmt;
 
 import info.nametake.stmt.StatementExecutor;
 
