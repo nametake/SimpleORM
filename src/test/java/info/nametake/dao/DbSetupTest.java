@@ -2,17 +2,11 @@ package info.nametake.dao;
 
 import com.ninja_squad.dbsetup.destination.Destination;
 import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
-import com.sun.glass.ui.EventLoop;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
-import static org.hamcrest.CoreMatchers.anything;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -27,8 +21,14 @@ public class DbSetupTest {
 
     private static Connection con;
 
-    private static String dropTable = "DROP TABLE IF EXISTS USER;";
-    private static String createTable = "CREATE TABLE IF NOT EXISTS USER (ID INT PRIMARY KEY, NAME VARCHAR(12), PASSWORD VARCHAR(12));";
+    private static String dropTableSql = "DROP TABLE IF EXISTS USER;";
+    private static String createTableSql = "CREATE TABLE IF NOT EXISTS " +
+            "USER (ID INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(12), PASS VARCHAR(12));";
+
+
+    // データベースのデータ
+    private static String username = "Taro";
+    private static String password = "rota";
 
 
     /**
@@ -42,8 +42,8 @@ public class DbSetupTest {
 
         // テーブルの生成
         Statement stmt = con.createStatement();
-        stmt.execute(dropTable);
-        stmt.execute(createTable);
+        stmt.execute(dropTableSql);
+        stmt.execute(createTableSql);
 
         stmt.close();
     }
@@ -56,25 +56,95 @@ public class DbSetupTest {
     @AfterClass
     public static void destructor() throws SQLException {
         Statement stmt = con.createStatement();
-        stmt.execute(dropTable);
+        stmt.execute(dropTableSql);
         con.close();
     }
 
-
-    @Test
-    public void createConnection() {
+    /**
+     * 各テスト開始前にデータを2個セット
+     */
+    @Before
+    public void insertData() {
+        String taro = "INSERT INTO USER (NAME, PASS) VALUES('taro', 'taro')";
+        try {
+            PreparedStatement ps = con.prepareStatement(taro);
+            ps.executeUpdate();
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * 各テスト終了後にテーブルのデータを全削除
+     */
+    @After
+    public void deleteData() {
+        String sql = "DELETE FROM USER";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Insert test
+     * @throws SQLException
+     */
     @Test
-    public void setupTestDb() {
-//        try {
-//            Statement stmt = con.createStatement();
-//
-//            stmt.execute("CREATE TABLE IF NOT EXISTS USER (ID INT PRIMARY KEY, NAME VARCHAR(12), PASSWORD VARCHAR(12));");
-//            stmt.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+    public void testInsert() throws SQLException {
+        // Create insert sql
+        String sql = "INSERT INTO USER (NAME, PASS) VALUES('taro', 'taro')";
+        // Create stmt
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.executeUpdate();
+
+        // Execute
+        int result = ps.executeUpdate();
+
+        // Test
+        assertThat(1, is(result));
+    }
+
+    /**
+     * Select test
+     * @throws SQLException
+     */
+    @Test
+    public void testSelect() throws SQLException {
+        String sql = "SELECT * FROM USER WHERE ID = 1";
+        // Create stmt
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+
+        // Test
+        while (rs.next()) {
+            assertThat(1, is(rs.getInt("ID")));
+            assertThat("taro", is(rs.getString("NAME")));
+            assertThat("taro", is(rs.getString("PASS")));
+        }
+    }
+
+    /**
+     * Delete test
+     * @throws SQLException
+     */
+    @Test
+    public void testDelete() throws SQLException {
+        // Create delete sql
+        String sql = "DELETE FROM USER WHERE ID = 1";
+        // Create stmt
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.executeUpdate();
+
+        // Execute
+        int result = ps.executeUpdate();
+
+        // Test
+        assertThat(0, is(result));
     }
 
 }
