@@ -1,100 +1,25 @@
 package info.nametake.dao;
 
-import com.ninja_squad.dbsetup.destination.Destination;
-import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
-import org.junit.*;
+import com.sun.xml.internal.rngom.parse.host.Base;
+import org.junit.Test;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by nameki-shogo on 2016/05/19.
- */
-public class DbSetupTest {
 
-    private static String url = "jdbc:h2:./testdb";
-    private static String user = "sa";
-    private static String pass = "";
-    private static Destination destination = new DriverManagerDestination(url, user, pass);
-
-    private static Connection con;
-
-    private static String dropTableSql = "DROP TABLE IF EXISTS USER;";
-    private static String createTableSql = "CREATE TABLE IF NOT EXISTS " +
-            "USER (ID INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(12), PASS VARCHAR(12));";
-
-
-    // データベースのデータ
-    private static String username = "Taro";
-    private static String password = "rota";
-
-
-    /**
-     * テスト用のテーブルの作成。
-     * @throws SQLException
-     */
-    @BeforeClass
-    public static void initialize() throws SQLException {
-        // コネクションを生成
-        con = destination.getConnection();
-
-        // テーブルの生成
-        Statement stmt = con.createStatement();
-        stmt.execute(dropTableSql);
-        stmt.execute(createTableSql);
-
-        stmt.close();
-    }
-
-
-    /**
-     * データベースへのコネクションを閉じる。
-     * @throws SQLException
-     */
-    @AfterClass
-    public static void destructor() throws SQLException {
-        Statement stmt = con.createStatement();
-        stmt.execute(dropTableSql);
-        con.close();
-    }
-
-    /**
-     * 各テスト開始前にデータを2個セット
-     */
-    @Before
-    public void insertData() {
-        String taro = "INSERT INTO USER (NAME, PASS) VALUES('taro', 'taro')";
-        try {
-            PreparedStatement ps = con.prepareStatement(taro);
-            ps.executeUpdate();
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 各テスト終了後にテーブルのデータを全削除
-     */
-    @After
-    public void deleteData() {
-        String sql = "DELETE FROM USER";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
+public class DbSetupTest extends BaseDBTest {
 
     /**
      * Insert test
+     *
      * @throws SQLException
      */
-    @Test
+    @Override
     public void testInsert() throws SQLException {
         // Create insert sql
         String sql = "INSERT INTO USER (NAME, PASS) VALUES('taro', 'taro')";
@@ -111,9 +36,10 @@ public class DbSetupTest {
 
     /**
      * Select test
+     *
      * @throws SQLException
      */
-    @Test
+    @Override
     public void testSelect() throws SQLException {
         String sql = "SELECT * FROM USER WHERE ID = 1";
         // Create stmt
@@ -130,9 +56,10 @@ public class DbSetupTest {
 
     /**
      * Delete test
+     *
      * @throws SQLException
      */
-    @Test
+    @Override
     public void testDelete() throws SQLException {
         // Create delete sql
         String sql = "DELETE FROM USER WHERE ID = 1";
