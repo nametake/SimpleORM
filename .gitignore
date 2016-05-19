@@ -1,6 +1,9 @@
 ### Mac
 .DS_Store
 
+### DB
+*.db
+
 ### https://raw.github.com/github/gitignore/77e29837cf03b59fc4d885ea011bbd683caaaf85/java.gitignore
 
 *.class
