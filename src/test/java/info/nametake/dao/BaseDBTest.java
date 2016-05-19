@@ -87,11 +87,12 @@ abstract public class BaseDBTest {
     }
 
     @Test
+    abstract public void testSelect() throws SQLException;
+
+    @Test
     abstract public void testInsert() throws SQLException;
 
     @Test
     abstract public void testDelete() throws SQLException;
 
-    @Test
-    abstract public void testSelect() throws SQLException;
 }

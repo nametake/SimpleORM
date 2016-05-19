@@ -4,8 +4,11 @@ import info.nametake.models.User;
 import org.junit.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -15,16 +18,16 @@ import static org.junit.Assert.fail;
 public class DaoTest extends BaseDBTest {
 
 
-    Dao<User> userDao = null;
-    User user = null;
+    private static Dao<User> userDao = null;
+    private User user = null;
 
     @BeforeClass
-    public void createDao() {
+    public static void createDao() {
         userDao = DaoManager.createDao(con, User.class);
     }
 
     @AfterClass
-    public void deleteDao() {
+    public static void deleteDao() {
         userDao = null;
     }
 
@@ -54,19 +57,41 @@ public class DaoTest extends BaseDBTest {
     }
 
     @Test
-    public void testInsert() throws SQLException {
-        fail();
+    public void testSelect() throws SQLException {
+        int id = 1;
+        User user = userDao.selectById(id);
+        if (user == null) {
+            fail("Failed selectById id 1");
+            return;
+        }
+        assertThat(id, is(user.getId()));
+    }
 
+    @Test
+    public void testInsert() throws SQLException {
+        int result = userDao.insert(user);
+        assertThat(1, is(result));
     }
 
     @Test
     public void testDelete() throws SQLException {
-        fail();
-
+        int result = userDao.insert(user);
+        assertThat(0, is(result));
     }
 
     @Test
-    public void testSelect() throws SQLException {
-        fail();
+    public void testSelectAll() throws SQLException{
+        List<User> users = userDao.selectAll();
+        if (users == null) {
+            fail("selectAll() result is null.");
+            return;
+        }
+        // もし長さが0なら失敗
+        assertThat(0, is(not(users.size())));
+        //  Userクラスのインスタンス化を設定
+        for (User user: users) {
+            assertThat(user, instanceOf(User.class));
+        }
     }
+
 }
