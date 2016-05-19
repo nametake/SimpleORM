@@ -1,5 +1,7 @@
 package info.nametake.dao;
 
+import info.nametake.exception.AnnotationException;
+import info.nametake.models.NotAnnotationModel;
 import info.nametake.models.User;
 import org.junit.*;
 
@@ -22,7 +24,7 @@ public class DaoTest extends BaseDBTest {
     private User user = null;
 
     @BeforeClass
-    public static void createDao() {
+    public static void createDao() throws AnnotationException {
         userDao = DaoFacotry.createDao(con, User.class);
     }
 
@@ -51,9 +53,14 @@ public class DaoTest extends BaseDBTest {
     }
 
     @Test
-    public void testCreateDao() {
+    public void testCreateDao() throws AnnotationException {
         Dao<User> userDao = DaoFacotry.createDao(con, User.class);
         assertThat(userDao, instanceOf(Dao.class));
+    }
+
+    @Test(expected = AnnotationException.class)
+    public void testNotTalbeAnnotation() throws AnnotationException {
+        Dao<User> userDao = DaoFacotry.createDao(con, NotAnnotationModel.class);
     }
 
     @Test
