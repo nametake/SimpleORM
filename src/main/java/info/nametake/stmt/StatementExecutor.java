@@ -65,7 +65,7 @@ public class StatementExecutor<T> {
      * @param resultSet
      * @return
      */
-    public T convertResultSetToModel(Class<T> clazz, ResultSet resultSet) {
+    private T convertResultSetToModel(Class<T> clazz, ResultSet resultSet) {
         return null;
     }
 
