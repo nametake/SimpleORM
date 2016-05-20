@@ -3,6 +3,8 @@ package info.nametake.dao;
 import info.nametake.stmt.StatementExecutor;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -28,7 +30,11 @@ public class DaoImpl<T> implements Dao<T> {
         return null;
     }
 
-    public List<T> selectAll() {
+    public List<T> selectAll() throws SQLException {
+        // TODO:
+        // SQLの作成
+        String sql = "";
+        PreparedStatement ps = connection.prepareStatement(sql);
         return null;
     }
 
