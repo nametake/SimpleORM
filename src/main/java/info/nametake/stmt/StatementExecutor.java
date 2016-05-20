@@ -13,16 +13,26 @@ import java.util.List;
  */
 public class StatementExecutor<T> {
 
+    /**
+     * StatementExecutorを生成する static ファクトリー
+     * @param connection
+     * @param clazz
+     * @param <T>
+     * @return 指定したクラスの StatementExecutor のインスタンス
+     * @throws AnnotationException
+     */
+    public static <T> StatementExecutor<T> createStatementExecutor(Connection connection, Class<T> clazz)
+            throws AnnotationException {
+        return new StatementExecutor<T>(connection, clazz);
+    }
+
     // 渡されたコネクション
     private Connection connection = null;
     // 格納するモデルのクラス
     private Class<T> clazz = null;
 
-    public StatementExecutor(Connection connection, T... t) throws AnnotationException {
+    private StatementExecutor(Connection connection, Class<T> clazz) throws AnnotationException {
         this.connection = connection;
-
-        @SuppressWarnings("unchecked")
-        Class<T> clazz = (Class<T>) t.getClass().getComponentType();
         this.clazz = clazz;
 
         if (this.clazz.getAnnotation(DatabaseTable.class) == null) {

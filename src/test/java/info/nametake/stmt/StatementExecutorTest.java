@@ -1,5 +1,6 @@
 package info.nametake.stmt;
 
+import com.sun.tools.corba.se.idl.constExpr.Not;
 import info.nametake.BaseDBTest;
 import info.nametake.exception.AnnotationException;
 import info.nametake.models.NotAnnotationModel;
@@ -16,7 +17,7 @@ public class StatementExecutorTest extends BaseDBTest {
 
     @Before
     public void createStmtExecutor() throws AnnotationException {
-        stmtExecutor = new StatementExecutor<User>(con);
+        stmtExecutor = StatementExecutor.createStatementExecutor(con, User.class);
     }
 
     @After
@@ -26,6 +27,8 @@ public class StatementExecutorTest extends BaseDBTest {
 
 
     @Test(expected = AnnotationException.class)
-    public void testCheckModelDataFormat() {
+    public void testCheckModelDataFormat() throws AnnotationException {
+        StatementExecutor<NotAnnotationModel> stmte
+                = StatementExecutor.createStatementExecutor(con, NotAnnotationModel.class);
     }
 }
