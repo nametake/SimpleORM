@@ -36,7 +36,7 @@ public class StatementExecutor<T> {
         this.clazz = clazz;
 
         if (this.clazz.getAnnotation(DatabaseTable.class) == null) {
-            throw new AnnotationException("");
+            throw new AnnotationException();
         }
     }
 

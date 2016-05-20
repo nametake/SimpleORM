@@ -13,7 +13,7 @@ public class DaoFacotry {
         // Check decorated DatabaseTalbe annotation
         DatabaseTable databaseTable = clazz.getAnnotation(DatabaseTable.class);
         if (databaseTable == null) {
-            throw new AnnotationException("Not decorated DatabaseTable annotation.");
+            throw new AnnotationException();
         }
 
         // Create Dao
