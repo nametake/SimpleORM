@@ -14,12 +14,10 @@ public class DaoImpl<T> implements Dao<T> {
 
     private final Connection connection;
     private final Class<T> clazz;
-    private final StatementExecutor statementExecutor;
 
     public DaoImpl(Connection connection, Class<T> clazz) {
         this.connection = connection;
         this.clazz = clazz;
-        this.statementExecutor = null;
     }
 
     public List<T> select(T data) {
