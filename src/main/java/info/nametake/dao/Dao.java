@@ -1,5 +1,6 @@
 package info.nametake.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
 public interface Dao<T> {
     public List<T> select(T data);
     public T selectById(int id);
-    public List<T> selectAll();
+    public List<T> selectAll() throws SQLException;
     public int update(T data);
     public int insert(T data);
     public int delete(T data);
