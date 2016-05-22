@@ -38,7 +38,7 @@ class DaoImpl<T> implements Dao<T> {
 
     public List<T> selectAll() throws SQLException {
         PreparedStatement ps = stmtBuilder.getSelectAllStatement();
-        return null;
+        return stmtExecutor.execute(ps);
     }
 
     public int update(T data) {
@@ -53,7 +53,4 @@ class DaoImpl<T> implements Dao<T> {
         return 0;
     }
 
-    public PreparedStatement buildStatement() {
-        return null;
-    }
 }
