@@ -1,20 +1,24 @@
 package info.nametake.models;
 
+import info.nametake.dao.DataType;
 import info.nametake.db.DatabaseField;
 import info.nametake.db.DatabaseTable;
+import org.relaxng.datatype.Datatype;
 
 /**
  * Created by nameki-shogo on 2016/05/19.
  */
 @DatabaseTable(tableName = "user")
 public class User {
-    @DatabaseField(columnName = "id", primaryKey = true)
+    @DatabaseField(columnName = "id",
+            dataType = DataType.INT,
+            primaryKey = true)
     private int id;
 
-    @DatabaseField(columnName = "name")
+    @DatabaseField(columnName = "name", dataType = DataType.STRING)
     private String name;
 
-    @DatabaseField(columnName = "password")
+    @DatabaseField(columnName = "password", dataType = DataType.STRING)
     private String password;
 
     public int getId() {

@@ -4,6 +4,7 @@ import info.nametake.db.DatabaseField;
 import info.nametake.db.DatabaseTable;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class TableInfo<T> {
         table = clazz.getAnnotation(DatabaseTable.class);
         // Set field
         primaryField = null;
+        fields = new ArrayList<DatabaseField>();
         for (Field field : clazz.getDeclaredFields()) {
             DatabaseField dbf = field.getAnnotation(DatabaseField.class);
             fields.add(dbf);

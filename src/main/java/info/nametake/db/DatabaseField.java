@@ -1,5 +1,7 @@
 package info.nametake.db;
 
+import info.nametake.dao.DataType;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -13,5 +15,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface DatabaseField {
     String columnName();
+    DataType dataType();
     boolean primaryKey() default false;
 }
