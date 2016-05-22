@@ -21,7 +21,6 @@ public class SQLBuilder {
         sb.append(SELECT);
         sb.append(getCommaSeparatedField());
         sb.append(getFromTable());
-        System.out.println(sb);
         return new String(sb);
     }
 

@@ -8,17 +8,17 @@ import org.relaxng.datatype.Datatype;
 /**
  * Created by nameki-shogo on 2016/05/19.
  */
-@DatabaseTable(tableName = "user")
+@DatabaseTable(tableName = "USER")
 public class User {
-    @DatabaseField(columnName = "id",
+    @DatabaseField(columnName = "ID",
             dataType = DataType.INT,
             primaryKey = true)
     private int id;
 
-    @DatabaseField(columnName = "name", dataType = DataType.STRING)
+    @DatabaseField(columnName = "NAME", dataType = DataType.STRING)
     private String name;
 
-    @DatabaseField(columnName = "password", dataType = DataType.STRING)
+    @DatabaseField(columnName = "PASS", dataType = DataType.STRING)
     private String password;
 
     public int getId() {

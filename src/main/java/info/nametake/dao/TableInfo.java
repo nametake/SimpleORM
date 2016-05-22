@@ -39,6 +39,10 @@ public class TableInfo<T> {
         }
     }
 
+    public Class<T> getClazz() {
+        return clazz;
+    }
+
     public String getTableName() {
         return table.tableName();
     }

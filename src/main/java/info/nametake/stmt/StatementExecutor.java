@@ -1,12 +1,16 @@
 package info.nametake.stmt;
 
 import info.nametake.dao.TableInfo;
+import info.nametake.db.DatabaseField;
 import info.nametake.db.DatabaseTable;
 import info.nametake.exception.AnnotationException;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +39,7 @@ public class StatementExecutor<T> {
 
     // 渡されたコネクション
     private Connection connection = null;
+    // 渡されたテーブル情報
     private TableInfo<T> tableInfo = null;
 
     private StatementExecutor(Connection connection, TableInfo<T> tableInfo) throws AnnotationException {
@@ -44,11 +49,17 @@ public class StatementExecutor<T> {
 
     /**
      * 渡されたSQLを実行する。
-     * @param sql
+     * @param ps
      * @return モデルのリスト
      */
-    public List<T> executeQuery(String sql) throws SQLException{
-        return null;
+    public List<T> execute(PreparedStatement ps) throws SQLException{
+        List<T> list = new ArrayList<T>();
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            T row = convertResultSetToModel(tableInfo.getClazz(), rs);
+            list.add(row);
+        }
+        return list;
     }
 
     /**
@@ -67,8 +78,21 @@ public class StatementExecutor<T> {
      * @param resultSet
      * @return
      */
-    private T convertResultSetToModel(Class<T> clazz, ResultSet resultSet) {
-        return null;
+    private T convertResultSetToModel(Class<T> clazz, ResultSet resultSet) throws SQLException {
+        T instance = null;
+        try {
+            instance = clazz.newInstance();
+            for (Field field : clazz.getDeclaredFields()) {
+                field.setAccessible(true);
+                String fieldName = field.getAnnotation(DatabaseField.class).columnName();
+                field.set(instance, resultSet.getObject(fieldName));
+            }
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return instance;
     }
 
 }
