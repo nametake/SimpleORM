@@ -40,7 +40,6 @@ public class SQLBuilderTest {
         System.out.println("Create:" + s);
         System.out.println("Get   :" + selectAllSql);
         assertThat(selectAllSql, is(s));
-
     }
 
     @After

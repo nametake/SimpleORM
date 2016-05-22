@@ -1,5 +1,6 @@
 package info.nametake.dao;
 
+import info.nametake.stmt.StatementBuilder;
 import info.nametake.stmt.StatementExecutor;
 
 import java.sql.Connection;
@@ -15,11 +16,15 @@ class DaoImpl<T> implements Dao<T> {
     private final Connection connection;
     private final Class<T> clazz;
     private final TableInfo<T> tableInfo;
+    private StatementBuilder<T> stmtBuilder;
+    private StatementExecutor<T> stmtExecutor;
 
     public DaoImpl(Connection connection, Class<T> clazz) {
         this.connection = connection;
         this.clazz = clazz;
         this.tableInfo = new TableInfo<T>(clazz);
+        this.stmtBuilder = new StatementBuilder<T>(connection, tableInfo);
+        this.stmtExecutor = new StatementExecutor<T>();
     }
 
     public List<T> select(T data) {
@@ -31,10 +36,7 @@ class DaoImpl<T> implements Dao<T> {
     }
 
     public List<T> selectAll() throws SQLException {
-        // TODO:
-        // SQLの作成
-        String sql = "";
-        PreparedStatement ps = connection.prepareStatement(sql);
+        PreparedStatement ps = stmtBuilder.getSelectAllStatement();
         return null;
     }
 
