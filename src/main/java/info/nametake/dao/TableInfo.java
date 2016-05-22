@@ -1,6 +1,6 @@
 package info.nametake.dao;
 
-import info.nametake.db.DatabaseColumn;
+import info.nametake.db.DatabaseField;
 import info.nametake.db.DatabaseTable;
 
 import java.lang.reflect.Field;
@@ -13,21 +13,25 @@ public class TableInfo<T> {
     private final Class<T> clazz;
 
     // Table info
-    private final String tableName;
-    private List<String> columnNames;
-    private String primaryKey;
+    private final DatabaseTable table;
+    private List<DatabaseField> fields;
+    private DatabaseField primaryField;
 
     public TableInfo(Class<T> clazz) {
         this.clazz = clazz;
 
         // Set table name
-        tableName = clazz.getAnnotation(DatabaseTable.class).tableName();
-        // Set column name
-        primaryKey = null;
+        table = clazz.getAnnotation(DatabaseTable.class);
+        // Set field
+        primaryField = null;
         for (Field field : clazz.getDeclaredFields()) {
-            DatabaseColumn dc = field.getAnnotation(DatabaseColumn.class);
-            columnNames.add(dc.columnName());
+            DatabaseField dbf = field.getAnnotation(DatabaseField.class);
+            fields.add(dbf);
+            if (dbf.primaryKey()) {
+                primaryField = dbf;
+            }
         }
-
     }
+
+
 }

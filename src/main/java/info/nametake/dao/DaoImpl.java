@@ -14,11 +14,12 @@ class DaoImpl<T> implements Dao<T> {
 
     private final Connection connection;
     private final Class<T> clazz;
+    private final TableInfo<T> tableInfo;
 
     public DaoImpl(Connection connection, Class<T> clazz) {
         this.connection = connection;
         this.clazz = clazz;
-
+        this.tableInfo = new TableInfo<T>(clazz);
     }
 
     public List<T> select(T data) {
