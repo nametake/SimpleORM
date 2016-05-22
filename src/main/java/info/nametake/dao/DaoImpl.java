@@ -18,6 +18,7 @@ class DaoImpl<T> implements Dao<T> {
     public DaoImpl(Connection connection, Class<T> clazz) {
         this.connection = connection;
         this.clazz = clazz;
+
     }
 
     public List<T> select(T data) {
@@ -46,5 +47,9 @@ class DaoImpl<T> implements Dao<T> {
 
     public int delete(T data) {
         return 0;
+    }
+
+    public PreparedStatement buildStatement() {
+        return null;
     }
 }
