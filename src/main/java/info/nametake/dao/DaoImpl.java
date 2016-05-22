@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by shogo on 2016/05/19.
  */
-public class DaoImpl<T> implements Dao<T> {
+class DaoImpl<T> implements Dao<T> {
 
     private final Connection connection;
     private final Class<T> clazz;
