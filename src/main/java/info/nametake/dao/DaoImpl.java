@@ -1,5 +1,6 @@
 package info.nametake.dao;
 
+import info.nametake.exception.AnnotationException;
 import info.nametake.stmt.StatementBuilder;
 import info.nametake.stmt.StatementExecutor;
 
@@ -19,12 +20,12 @@ class DaoImpl<T> implements Dao<T> {
     private StatementBuilder<T> stmtBuilder;
     private StatementExecutor<T> stmtExecutor;
 
-    public DaoImpl(Connection connection, Class<T> clazz) {
+    public DaoImpl(Connection connection, Class<T> clazz) throws AnnotationException {
         this.connection = connection;
         this.clazz = clazz;
         this.tableInfo = new TableInfo<T>(clazz);
         this.stmtBuilder = new StatementBuilder<T>(connection, tableInfo);
-        this.stmtExecutor = new StatementExecutor<T>();
+        this.stmtExecutor = StatementExecutor.createStatementExecutor(connection, tableInfo);
     }
 
     public List<T> select(T data) {

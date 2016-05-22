@@ -1,5 +1,6 @@
 package info.nametake.stmt;
 
+import info.nametake.dao.TableInfo;
 import info.nametake.db.DatabaseTable;
 import info.nametake.exception.AnnotationException;
 
@@ -23,21 +24,22 @@ public class StatementExecutor<T> {
      */
     public static <T> StatementExecutor<T> createStatementExecutor(Connection connection, Class<T> clazz)
             throws AnnotationException {
-        return new StatementExecutor<T>(connection, clazz);
+        TableInfo<T> tableInfo = new TableInfo<T>(clazz);
+        return new StatementExecutor<T>(connection, tableInfo);
+    }
+
+    public static <T> StatementExecutor<T> createStatementExecutor(Connection connection, TableInfo<T> tableInfo)
+            throws AnnotationException {
+        return new StatementExecutor<T>(connection, tableInfo);
     }
 
     // 渡されたコネクション
     private Connection connection = null;
-    // 格納するモデルのクラス
-    private Class<T> clazz = null;
+    private TableInfo<T> tableInfo = null;
 
-    private StatementExecutor(Connection connection, Class<T> clazz) throws AnnotationException {
+    private StatementExecutor(Connection connection, TableInfo<T> tableInfo) throws AnnotationException {
         this.connection = connection;
-        this.clazz = clazz;
-
-        if (this.clazz.getAnnotation(DatabaseTable.class) == null) {
-            throw new AnnotationException();
-        }
+        this.tableInfo = tableInfo;
     }
 
     /**
