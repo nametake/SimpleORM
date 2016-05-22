@@ -35,6 +35,10 @@ public class TableInfo<T> {
         }
     }
 
+    public String getTableName() {
+        return table.tableName();
+    }
+
     public List<String> getFieldNames() {
         List<String> list = new ArrayList<String>();
         for (DatabaseField field: fields) {
