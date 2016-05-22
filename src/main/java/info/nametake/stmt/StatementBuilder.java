@@ -17,7 +17,7 @@ public class StatementBuilder<T> {
         this.tableInfo = tableInfo;
     }
 
-    public Statement getSelectAll() {
+    public Statement getSelectAllStatement() {
         return null;
     }
 }
