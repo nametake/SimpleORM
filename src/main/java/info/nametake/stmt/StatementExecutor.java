@@ -32,6 +32,14 @@ public class StatementExecutor<T> {
         return new StatementExecutor<T>(connection, tableInfo);
     }
 
+    /**
+     * StatementExecutorを生成する static ファクトリー
+     * @param connection
+     * @param tableInfo
+     * @param <T>
+     * @return
+     * @throws AnnotationException
+     */
     public static <T> StatementExecutor<T> createStatementExecutor(Connection connection, TableInfo<T> tableInfo)
             throws AnnotationException {
         return new StatementExecutor<T>(connection, tableInfo);
@@ -65,8 +73,7 @@ public class StatementExecutor<T> {
     /**
      * 渡されたSQLを実行する。
      * @param sql
-     * @return (1) SQL データ操作言語(DML) 文の場合は行数、(2) 何も返さない SQL 文の場合は 0
-
+     * @return モデルのリスト
      */
     public List<T> execute(String sql) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(sql);

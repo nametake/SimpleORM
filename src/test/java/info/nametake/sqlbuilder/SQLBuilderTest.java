@@ -42,6 +42,11 @@ public class SQLBuilderTest {
         assertThat(selectAllSql, is(s));
     }
 
+    @Test
+    public void testSelectById() {
+
+    }
+
     @After
     public void tearDown() throws Exception {
         tableInfo = null;
