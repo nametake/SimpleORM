@@ -31,7 +31,7 @@ public class SQLBuilderTest {
         sb.append(String.join(", ", tableInfo.getFieldNames()));
         sb.append(" FROM ");
         sb.append(tableInfo.getTableName());
-        sb.append(";");
+        sb.append(" ;");
         String expected = new String(sb);
 
         // Get select all sql
@@ -57,7 +57,7 @@ public class SQLBuilderTest {
         sb.append(tableInfo.getPrimaryKey());
         sb.append(" = ");
         sb.append(id);
-        sb.append(";");
+        sb.append(" ;");
         String expected = new String(sb);
 
         // Get select by id sql

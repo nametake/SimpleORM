@@ -7,9 +7,10 @@ import info.nametake.dao.TableInfo;
  */
 public class SQLBuilder {
     private static final String SELECT = "SELECT ";
-    private static final String FROM = "FROM ";
-    private static final String WHERE = "WHERE ";
-    private static final String END = ";";
+    private static final String FROM   = "FROM ";
+    private static final String WHERE  = "WHERE ";
+    private static final String END    = ";";
+    private static final String EQ     = " = ";
 
     private TableInfo tableInfo;
 
@@ -24,7 +25,7 @@ public class SQLBuilder {
      * @return
      */
     public String selectAll() {
-        StringBuilder sb = new StringBuilder();
+        StringBuffer sb = new StringBuffer();
         sb.append(SELECT);
         sb.append(getCommaSeparatedField());
         sb.append(getFromTable());
@@ -32,9 +33,19 @@ public class SQLBuilder {
         return new String(sb);
     }
 
+    /**
+     * IDを指定したSelect文を生成
+     * @param id
+     * @return
+     */
     public String selectById(int id) {
-        StringBuilder sb = new StringBuilder();
-        return null;
+        StringBuffer sb = new StringBuffer();
+        sb.append(SELECT);
+        sb.append(getCommaSeparatedField());
+        sb.append(getFromTable());
+        sb.append(getWhereById(id));
+        sb.append(END);
+        return new String(sb);
     }
 
     /**
@@ -48,13 +59,22 @@ public class SQLBuilder {
     }
 
     /**
-     * FROM 分を生成
+     * FROM 分を取得
      * @return "FROM テーブル名" の文字列
      */
     private String getFromTable() {
-        StringBuffer sb = new StringBuffer();
-        sb.append(FROM);
+        StringBuffer sb = new StringBuffer(FROM);
         sb.append(tableInfo.getTableName());
+        sb.append(" ");
+        return new String(sb);
+    }
+
+    private String getWhereById(int id) {
+        StringBuffer sb = new StringBuffer(WHERE);
+        sb.append(tableInfo.getPrimaryKey());
+        sb.append(EQ);
+        sb.append(id);
+        sb.append(" ");
         return new String(sb);
     }
 
