@@ -6,7 +6,6 @@ import info.nametake.sqlbuilder.SQLBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Created by shogo on 2016/05/22.
@@ -24,6 +23,12 @@ public class StatementBuilder<T> {
 
     public PreparedStatement getSelectAllStatement() throws SQLException {
         String sql = sqlBuilder.selectAll();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        return ps;
+    }
+
+    public PreparedStatement getSlectByIdStatement(int id) throws SQLException {
+        String sql = sqlBuilder.selectById(id);
         PreparedStatement ps = connection.prepareStatement(sql);
         return ps;
     }

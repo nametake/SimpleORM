@@ -1,6 +1,5 @@
 package info.nametake.stmt;
 
-import com.sun.tools.corba.se.idl.constExpr.Not;
 import info.nametake.BaseDBTest;
 import info.nametake.dao.TableInfo;
 import info.nametake.exception.AnnotationException;
@@ -14,6 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -54,4 +54,18 @@ public class StatementExecutorTest extends BaseDBTest {
             assertThat(user, instanceOf(User.class));
         }
     }
+
+    @Test
+    public void testSlectById() throws AnnotationException, SQLException {
+        int id = 1;
+        StatementExecutor<User> stmte
+                = StatementExecutor.createStatementExecutor(con, User.class);
+        List<User> list = stmte.execute(stmtBuilder.getSlectByIdStatement(id));
+        assertThat(1, is(list.size()));
+        User user = list.get(0);
+        assertThat(user, instanceOf(User.class));
+        assertThat(id, is(user.getId()));
+    }
+
+
 }

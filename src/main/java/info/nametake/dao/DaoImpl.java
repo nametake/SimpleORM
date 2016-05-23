@@ -32,8 +32,14 @@ class DaoImpl<T> implements Dao<T> {
         return null;
     }
 
-    public T selectById(int id) {
-        return null;
+    public T selectById(int id) throws SQLException {
+        PreparedStatement ps = stmtBuilder.getSlectByIdStatement(id);
+        List<T> list = stmtExecutor.execute(ps);
+        if (list.size() != 1) {
+            throw new  SQLException();
+        }
+
+        return list.get(0);
     }
 
     public List<T> selectAll() throws SQLException {
