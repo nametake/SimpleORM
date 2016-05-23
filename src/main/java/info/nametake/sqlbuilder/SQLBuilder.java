@@ -1,4 +1,4 @@
-
+package info.nametake.sqlbuilder;
 
 import info.nametake.dao.TableInfo;
 
@@ -8,6 +8,8 @@ import info.nametake.dao.TableInfo;
 public class SQLBuilder {
     private static final String SELECT = "SELECT ";
     private static final String FROM = "FROM ";
+    private static final String WHERE = "WHERE ";
+    private static final String END = ";";
 
     private TableInfo tableInfo;
 
@@ -26,7 +28,13 @@ public class SQLBuilder {
         sb.append(SELECT);
         sb.append(getCommaSeparatedField());
         sb.append(getFromTable());
+        sb.append(END);
         return new String(sb);
+    }
+
+    public String selectById(int id) {
+        StringBuilder sb = new StringBuilder();
+        return null;
     }
 
     /**

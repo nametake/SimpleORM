@@ -55,5 +55,8 @@ public class TableInfo<T> {
         return list;
     }
 
+    public String getPrimaryKey() {
+        return primaryField.columnName();
+    }
 
 }

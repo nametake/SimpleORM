@@ -29,22 +29,42 @@ public class SQLBuilderTest {
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT ");
         sb.append(String.join(", ", tableInfo.getFieldNames()));
-        sb.append(" ");
-        sb.append("FROM ");
+        sb.append(" FROM ");
         sb.append(tableInfo.getTableName());
-        String s = new String(sb);
+        sb.append(";");
+        String expected = new String(sb);
 
         // Get select all sql
-        String selectAllSql = sqlBuilder.selectAll();
+        String actual = sqlBuilder.selectAll();
 
-        System.out.println("Create:" + s);
-        System.out.println("Get   :" + selectAllSql);
-        assertThat(selectAllSql, is(s));
+        System.out.println("Expected :" + expected);
+        System.out.println("Actual   :" + actual);
+        assertThat(expected, is(actual));
     }
 
     @Test
     public void testSelectById() {
+        // ID
+        int id = 1;
 
+        // Create sql
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT ");
+        sb.append(String.join(", ", tableInfo.getFieldNames()));
+        sb.append(" FROM ");
+        sb.append(tableInfo.getTableName());
+        sb.append(" WHERE ");
+        sb.append(tableInfo.getPrimaryKey());
+        sb.append(" = ");
+        sb.append(id);
+        sb.append(";");
+        String expected = new String(sb);
+
+        // Get select by id sql
+        String actual = sqlBuilder.selectById(id);
+        System.out.println("Expected :" + expected);
+        System.out.println("Actual   :" + actual);
+        assertThat(expected, is(actual));
     }
 
     @After
