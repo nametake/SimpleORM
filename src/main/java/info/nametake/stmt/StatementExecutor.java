@@ -48,7 +48,7 @@ public class StatementExecutor<T> {
     }
 
     /**
-     * 渡されたSQLを実行する。
+     * 渡されたPreparedStatementを実行する。
      * @param ps
      * @return モデルのリスト
      */
@@ -68,8 +68,9 @@ public class StatementExecutor<T> {
      * @return (1) SQL データ操作言語(DML) 文の場合は行数、(2) 何も返さない SQL 文の場合は 0
 
      */
-    public int executeUpdate(String sql, T data) throws SQLException {
-        return 0;
+    public List<T> execute(String sql) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        return execute(ps);
     }
 
     /**
