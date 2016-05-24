@@ -69,16 +69,28 @@ public class SQLBuilderTest {
 
     @Test
     public void testDelete() {
+        // Create sql
+        StringBuffer sb = new StringBuffer();
+        String expected = new String(sb);
     }
 
     @Test
     public void testUpdate() {
-
+        // Create sql
+        StringBuffer sb = new StringBuffer();
+        String expected = new String(sb);
     }
 
     @Test
     public void testInsert() {
-
+        // Create sql
+        StringBuffer sb = new StringBuffer();
+        sb.append("INSERT INTO ");
+        sb.append(tableInfo.getTableName());
+        sb.append(" (");
+        sb.append(") SET ");
+        String expected = new String(sb);
+        System.out.println("Expected :" + expected);
     }
 
     @After
