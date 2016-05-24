@@ -21,7 +21,7 @@
     <repositories>
         <repository>
             <id>info.nametake</id>
-            <url>https://nametake@bitbucket.org/nametake/simpleorm.git</url>
+            <url>https://api.bitbucket.org/1.0/repositories/nametake/simpleorm/raw/master/</url>
         </repository>
     </repositories>
 
