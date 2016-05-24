@@ -67,6 +67,21 @@ public class SQLBuilderTest {
         assertThat(expected, is(actual));
     }
 
+    @Test
+    public void testDelete() {
+        fail();
+    }
+
+    @Test
+    public void testUpdate() {
+
+    }
+
+    @Test
+    public void testInsert() {
+
+    }
+
     @After
     public void tearDown() throws Exception {
         tableInfo = null;
