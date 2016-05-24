@@ -79,6 +79,10 @@ public class StatementExecutor<T> {
         return execute(ps);
     }
 
+    public int update(PreparedStatement ps) throws SQLException {
+        return ps.executeUpdate();
+    }
+
     /**
      * 渡されたResultSetの1行をモデルにして返す。
      * @param clazz

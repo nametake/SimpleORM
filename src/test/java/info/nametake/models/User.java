@@ -4,8 +4,6 @@ import info.nametake.dao.DataType;
 import info.nametake.db.DatabaseField;
 import info.nametake.db.DatabaseTable;
 
-import java.util.Date;
-
 /**
  * Created by nameki-shogo on 2016/05/19.
  */
@@ -23,9 +21,6 @@ public class User {
     @DatabaseField(columnName = "PASS", dataType = DataType.STRING)
     private String password;
 
-    @DatabaseField(columnName = "DATE", dataType = DataType.DATETIME,
-    timeStamp = true)
-    private Date date;
 
     public int getId() {
         return id;
