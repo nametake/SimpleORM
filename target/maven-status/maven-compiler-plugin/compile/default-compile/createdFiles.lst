@@ -1,1 +1,11 @@
+info/nametake/dao/DaoImpl.class
+info/nametake/dao/TableInfo.class
+info/nametake/db/DatabaseField.class
 info/nametake/dao/Dao.class
+info/nametake/dao/DaoFacotry.class
+info/nametake/stmt/StatementExecutor.class
+info/nametake/sqlbuilder/SQLBuilder.class
+info/nametake/stmt/StatementBuilder.class
+info/nametake/db/DatabaseTable.class
+info/nametake/exception/AnnotationException.class
+info/nametake/dao/DataType.class

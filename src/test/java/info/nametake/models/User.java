@@ -3,7 +3,6 @@ package info.nametake.models;
 import info.nametake.dao.DataType;
 import info.nametake.db.DatabaseField;
 import info.nametake.db.DatabaseTable;
-import org.relaxng.datatype.Datatype;
 
 /**
  * Created by nameki-shogo on 2016/05/19.
