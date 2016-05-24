@@ -34,6 +34,8 @@ abstract public class BaseDBTest {
      */
     @BeforeClass
     public static void initialize() throws SQLException {
+        // コネクションを生成
+        con = destination.getConnection();
     }
 
     /**
@@ -43,6 +45,7 @@ abstract public class BaseDBTest {
      */
     @AfterClass
     public static void destructor() throws SQLException {
+        con.close();
     }
 
     /**
@@ -50,8 +53,6 @@ abstract public class BaseDBTest {
      */
     @Before
     public void insertData() throws SQLException {
-        // コネクションを生成
-        con = destination.getConnection();
 
         // テーブルの生成
         Statement stmt = con.createStatement();
@@ -78,7 +79,6 @@ abstract public class BaseDBTest {
 
         Statement stmt = con.createStatement();
         stmt.execute(dropTableSql);
-        con.close();
     }
 
 
