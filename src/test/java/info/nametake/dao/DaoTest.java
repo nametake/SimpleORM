@@ -60,7 +60,7 @@ public class DaoTest extends BaseDBTest {
     }
 
     @Test(expected = AnnotationException.class)
-    public void testNotTalbeAnnotation() throws AnnotationException {
+    public void testNotTableAnnotation() throws AnnotationException {
         Dao<User> userDao = DaoFacotry.createDao(con, NotAnnotationModel.class);
     }
 
