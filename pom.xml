@@ -45,8 +45,14 @@
             <version>1.4.191</version>
         </dependency>
 
-
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>info.nametake</id>
+            <name>SimpleORM</name>
+            <url>https://bitbucket.org/nametake/simpleorm/raw/master</url>
+        </repository>
+    </distributionManagement>
 
 </project>

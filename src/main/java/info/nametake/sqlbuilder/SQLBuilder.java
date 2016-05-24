@@ -2,6 +2,8 @@ package info.nametake.sqlbuilder;
 
 import info.nametake.dao.TableInfo;
 
+import java.util.List;
+
 /**
  * Created by nameki-shogo on 2016/05/19.
  */
@@ -9,8 +11,9 @@ public class SQLBuilder {
     private static final String SELECT = "SELECT ";
     private static final String FROM   = "FROM ";
     private static final String WHERE  = "WHERE ";
-    private static final String END    = ";";
+    private static final String SET    = "SET ";
     private static final String EQ     = " = ";
+    private static final String END    = ";";
 
     private TableInfo tableInfo;
 
@@ -49,6 +52,14 @@ public class SQLBuilder {
     }
 
     /**
+     * @return
+     */
+    public String update() {
+        StringBuffer sb = new StringBuffer();
+        return new String(sb);
+    }
+
+    /**
      * カンマ区切りのフィールド名を取得
      * @return カンマ区切りのフィールドの文字列
      */
@@ -57,6 +68,9 @@ public class SQLBuilder {
         sb.append(" ");
         return new String(sb);
     }
+
+
+
 
     /**
      * FROM 文を取得
@@ -82,6 +96,5 @@ public class SQLBuilder {
         sb.append(" ");
         return new String(sb);
     }
-
 
 }
