@@ -2,7 +2,6 @@ package info.nametake.stmt;
 
 import info.nametake.dao.TableInfo;
 import info.nametake.db.DatabaseField;
-import info.nametake.db.DatabaseTable;
 import info.nametake.exception.AnnotationException;
 
 import java.lang.reflect.Field;

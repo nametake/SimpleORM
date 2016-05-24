@@ -34,15 +34,6 @@ abstract public class BaseDBTest {
      */
     @BeforeClass
     public static void initialize() throws SQLException {
-        // コネクションを生成
-        con = destination.getConnection();
-
-        // テーブルの生成
-        Statement stmt = con.createStatement();
-        stmt.execute(dropTableSql);
-        stmt.execute(createTableSql);
-
-        stmt.close();
     }
 
     /**
@@ -52,38 +43,42 @@ abstract public class BaseDBTest {
      */
     @AfterClass
     public static void destructor() throws SQLException {
-        Statement stmt = con.createStatement();
-        stmt.execute(dropTableSql);
-        con.close();
     }
 
     /**
      * 各テスト開始前にデータを2個セット
      */
     @Before
-    public void insertData() {
+    public void insertData() throws SQLException {
+        // コネクションを生成
+        con = destination.getConnection();
+
+        // テーブルの生成
+        Statement stmt = con.createStatement();
+        stmt.execute(dropTableSql);
+        stmt.execute(createTableSql);
+
+        stmt.close();
+
         String taro = "INSERT INTO USER (NAME, PASS) VALUES('taro', 'taro')";
-        try {
-            PreparedStatement ps = con.prepareStatement(taro);
-            ps.executeUpdate();
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        PreparedStatement ps = con.prepareStatement(taro);
+        ps.executeUpdate();
+        ps.executeUpdate();
+        ps.executeUpdate();
     }
 
     /**
      * 各テスト終了後にテーブルのデータを全削除
      */
     @After
-    public void deleteData() {
+    public void deleteData() throws SQLException {
         String sql = "DELETE FROM USER";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.executeUpdate();
+
+        Statement stmt = con.createStatement();
+        stmt.execute(dropTableSql);
+        con.close();
     }
 
 

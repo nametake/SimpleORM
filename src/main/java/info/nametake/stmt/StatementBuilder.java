@@ -27,7 +27,7 @@ public class StatementBuilder<T> {
         return ps;
     }
 
-    public PreparedStatement getSlectByIdStatement(int id) throws SQLException {
+    public PreparedStatement getSelectByIdStatement(int id) throws SQLException {
         String sql = sqlBuilder.selectById(id);
         PreparedStatement ps = connection.prepareStatement(sql);
         return ps;

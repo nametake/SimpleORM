@@ -33,7 +33,7 @@ class DaoImpl<T> implements Dao<T> {
     }
 
     public T selectById(int id) throws SQLException {
-        PreparedStatement ps = stmtBuilder.getSlectByIdStatement(id);
+        PreparedStatement ps = stmtBuilder.getSelectByIdStatement(id);
         List<T> list = stmtExecutor.execute(ps);
         if (list.size() != 1) {
             throw new  SQLException();

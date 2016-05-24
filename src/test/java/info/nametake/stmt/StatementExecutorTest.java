@@ -56,11 +56,11 @@ public class StatementExecutorTest extends BaseDBTest {
     }
 
     @Test
-    public void testSlectById() throws AnnotationException, SQLException {
+    public void testSelectById() throws AnnotationException, SQLException {
         int id = 1;
         StatementExecutor<User> stmte
                 = StatementExecutor.createStatementExecutor(con, User.class);
-        List<User> list = stmte.execute(stmtBuilder.getSlectByIdStatement(id));
+        List<User> list = stmte.execute(stmtBuilder.getSelectByIdStatement(id));
         assertThat(1, is(list.size()));
         User user = list.get(0);
         assertThat(user, instanceOf(User.class));

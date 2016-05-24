@@ -1,0 +1,7 @@
+info/nametake/models/NotAnnotationModel.class
+info/nametake/models/User.class
+info/nametake/dao/DbSetupTest.class
+info/nametake/stmt/StatementExecutorTest.class
+info/nametake/BaseDBTest.class
+info/nametake/dao/DaoTest.class
+info/nametake/sqlbuilder/SQLBuilderTest.class
