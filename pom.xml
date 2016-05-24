@@ -8,15 +8,6 @@
     <artifactId>simpleorm</artifactId>
     <version>0.1-SNAPSHOT</version>
 
-    <!-- Dependency to jar on Maven Repository on Git-BitBucket -->
-    <dependencies>
-        <dependency>
-            <groupId>info.nametake</groupId>
-            <artifactId>simpleorm</artifactId>
-            <version>0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
     <!-- Maven Repository on Git-BitBucket -->
     <repositories>
         <repository>
