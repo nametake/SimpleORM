@@ -17,4 +17,6 @@ public @interface DatabaseField {
     String columnName();
     DataType dataType();
     boolean primaryKey() default false;
+    boolean autoIncrement() default true;
+    boolean timeStamp() default true;
 }
