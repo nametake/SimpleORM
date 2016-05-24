@@ -55,6 +55,16 @@ public class TableInfo<T> {
         return list;
     }
 
+    public List<String> getNotAutoUpdateFieldNames() {
+        List<String> list = new ArrayList<String>();
+        for (DatabaseField field: fields) {
+            if (!field.autoIncrement() && !field.timeStamp()) {
+                list.add(field.columnName());
+            }
+        }
+        return list;
+    }
+
     public String getPrimaryKey() {
         return primaryField.columnName();
     }

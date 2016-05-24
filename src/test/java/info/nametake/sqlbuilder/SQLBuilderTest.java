@@ -88,6 +88,7 @@ public class SQLBuilderTest {
         sb.append("INSERT INTO ");
         sb.append(tableInfo.getTableName());
         sb.append(" (");
+        sb.append(String.join(", ", tableInfo.getNotAutoUpdateFieldNames()));
         sb.append(") SET ");
         String expected = new String(sb);
         System.out.println("Expected :" + expected);
