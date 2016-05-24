@@ -47,15 +47,19 @@ class DaoImpl<T> implements Dao<T> {
         return stmtExecutor.execute(ps);
     }
 
-    public int update(T data) {
+    public int update(T data) throws SQLException {
         return 0;
     }
 
-    public int insert(T data) {
+    public int insert(T data) throws SQLException {
         return 0;
     }
 
-    public int delete(T data) {
+    public int delete(T data) throws SQLException {
+        return 0;
+    }
+
+    public int deleteById(int id) throws SQLException {
         return 0;
     }
 
