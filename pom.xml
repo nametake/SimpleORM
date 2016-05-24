@@ -47,12 +47,13 @@
 
     </dependencies>
 
-    <distributionManagement>
+    <repositories>
         <repository>
             <id>info.nametake</id>
-            <name>SimpleORM</name>
-            <url>https://bitbucket.org/nametake/simpleorm/raw/master</url>
+            <name>Simple ORM</name>
+            <url>https://bitbucket.org/nametake/simpleorm/raw/master/</url>
+            <layout>default</layout>
         </repository>
-    </distributionManagement>
+    </repositories>
 
 </project>
