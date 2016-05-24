@@ -69,16 +69,37 @@ public class SQLBuilderTest {
 
     @Test
     public void testDelete() {
+        // Create sql
+        StringBuffer sb = new StringBuffer();
+        String expected = new String(sb);
     }
 
     @Test
     public void testUpdate() {
-
+        // Create sql
+        StringBuffer sb = new StringBuffer();
+        String expected = new String(sb);
     }
 
     @Test
     public void testInsert() {
+        User user = new User();
+        user.setName("Jiro");
+        user.setPassword("9876");
 
+        // Create sql
+        StringBuffer sb = new StringBuffer();
+        sb.append("INSERT INTO ");
+        sb.append(tableInfo.getTableName());
+        sb.append(" (");
+        sb.append(String.join(", ", tableInfo.getNotAutoUpdateFieldNames()));
+        sb.append(") VALUES (?, ?);");
+        String expected = new String(sb);
+
+        String actual = sqlBuilder.insert();
+        System.out.println("Expected :" + expected);
+        System.out.println("Actual   :" + actual);
+        assertThat(expected, is(actual));
     }
 
     @After

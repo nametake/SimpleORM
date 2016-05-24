@@ -2,6 +2,7 @@ package info.nametake.sqlbuilder;
 
 import info.nametake.dao.TableInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,9 +10,11 @@ import java.util.List;
  */
 public class SQLBuilder {
     private static final String SELECT = "SELECT ";
+    private static final String INSERT = "INSERT INTO ";
+    private static final String SET    = "SET ";
+    private static final String VALUES = "VALUES ";
     private static final String FROM   = "FROM ";
     private static final String WHERE  = "WHERE ";
-    private static final String SET    = "SET ";
     private static final String EQ     = " = ";
     private static final String END    = ";";
 
@@ -59,6 +62,19 @@ public class SQLBuilder {
         return new String(sb);
     }
 
+    public String insert() {
+        List<String> fieldNames = tableInfo.getNotAutoUpdateFieldNames();
+        StringBuffer sb = new StringBuffer(INSERT);
+        sb.append(tableInfo.getTableName());
+        sb.append(" ");
+        sb.append(getRoundBrackets(String.join(", ", fieldNames)));
+        sb.append(" ");
+        sb.append(VALUES);
+        sb.append(getValuesQuestion(fieldNames.size()));
+        sb.append(END);
+        return new String(sb);
+    }
+
     /**
      * カンマ区切りのフィールド名を取得
      * @return カンマ区切りのフィールドの文字列
@@ -68,9 +84,6 @@ public class SQLBuilder {
         sb.append(" ");
         return new String(sb);
     }
-
-
-
 
     /**
      * FROM 文を取得
@@ -95,6 +108,23 @@ public class SQLBuilder {
         sb.append(id);
         sb.append(" ");
         return new String(sb);
+    }
+
+    /**
+     * カッコで括られた文字列を取得
+     * @param string
+     * @return (string)
+     */
+    private String getRoundBrackets(String string) {
+        return "(" + string + ")";
+    }
+
+    private String getValuesQuestion(int count) {
+        List<String> list = new ArrayList<String>();
+        for (int i = 0; i < count; i++) {
+            list.add("?");
+        }
+        return getRoundBrackets(String.join(", ", list));
     }
 
 }

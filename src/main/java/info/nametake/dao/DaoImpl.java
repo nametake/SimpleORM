@@ -52,7 +52,8 @@ class DaoImpl<T> implements Dao<T> {
     }
 
     public int insert(T data) throws SQLException {
-        return 0;
+        PreparedStatement ps = stmtBuilder.getInsertStatement(data);
+        return stmtExecutor.update(ps);
     }
 
     public int delete(T data) throws SQLException {

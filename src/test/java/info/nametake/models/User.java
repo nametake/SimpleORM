@@ -11,7 +11,8 @@ import info.nametake.db.DatabaseTable;
 public class User {
     @DatabaseField(columnName = "ID",
             dataType = DataType.INT,
-            primaryKey = true)
+            primaryKey = true,
+            autoIncrement = true)
     private int id;
 
     @DatabaseField(columnName = "NAME", dataType = DataType.STRING)
@@ -19,6 +20,7 @@ public class User {
 
     @DatabaseField(columnName = "PASS", dataType = DataType.STRING)
     private String password;
+
 
     public int getId() {
         return id;
