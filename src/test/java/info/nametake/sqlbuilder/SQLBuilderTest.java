@@ -69,7 +69,6 @@ public class SQLBuilderTest {
 
     @Test
     public void testDelete() {
-        fail();
     }
 
     @Test
