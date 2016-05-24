@@ -59,7 +59,7 @@ public class SQLBuilder {
     }
 
     /**
-     * FROM 分を取得
+     * FROM 文を取得
      * @return "FROM テーブル名" の文字列
      */
     private String getFromTable() {
@@ -69,6 +69,11 @@ public class SQLBuilder {
         return new String(sb);
     }
 
+    /**
+     * 指定された PK を指定するWHERE文をを取得
+     * @param id
+     * @return "WHERE (PK) = id"の文字列
+     */
     private String getWhereById(int id) {
         StringBuffer sb = new StringBuffer(WHERE);
         sb.append(tableInfo.getPrimaryKey());
