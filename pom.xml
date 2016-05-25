@@ -9,12 +9,12 @@
     <version>0.1-SNAPSHOT</version>
 
     <!-- Maven Repository on Git-BitBucket -->
-    <repositories>
+    <distributionManagement>
         <repository>
             <id>info.nametake</id>
             <url>https://api.bitbucket.org/1.0/repositories/nametake/simpleorm/raw/master/</url>
         </repository>
-    </repositories>
+    </distributionManagement>
 
     <dependencies>
 
