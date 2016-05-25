@@ -49,7 +49,6 @@ class DaoImpl<T> implements Dao<T> {
 
     public int update(T data) throws SQLException {
         PreparedStatement ps = stmtBuilder.getUpdateStatement(data);
-        System.out.println(ps);
         return stmtExecutor.update(ps);
     }
 
@@ -59,7 +58,8 @@ class DaoImpl<T> implements Dao<T> {
     }
 
     public int delete(T data) throws SQLException {
-        return 0;
+        PreparedStatement ps = stmtBuilder.getDeleteStatement(data);
+        return stmtExecutor.update(ps);
     }
 
     public int deleteById(int id) throws SQLException {

@@ -40,7 +40,6 @@ public class StatementBuilder<T> {
     public PreparedStatement getInsertStatement(T data) throws SQLException {
         String sql = sqlBuilder.insert();
         PreparedStatement ps = connection.prepareStatement(sql);
-
         return setValues(ps, data);
     }
 
@@ -48,8 +47,16 @@ public class StatementBuilder<T> {
         String sql = sqlBuilder.update();
         PreparedStatement ps = connection.prepareStatement(sql);
         ps = setValues(ps, data);
-        ps = setPrimaryKeyValue(ps, data);
+        ps = setPrimaryKeyValue(ps, data, tableInfo.getNotAutoUpdateFieldNames().size() + 1);
         return ps;
+    }
+
+    public PreparedStatement getDeleteStatement(T data) throws SQLException {
+        String sql = sqlBuilder.delete();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps = setPrimaryKeyValue(ps, data, 1);
+        return ps;
+
     }
 
     private PreparedStatement setValues(PreparedStatement ps, T data) throws SQLException {
@@ -82,7 +89,7 @@ public class StatementBuilder<T> {
         return ps;
     }
 
-    private PreparedStatement setPrimaryKeyValue(PreparedStatement ps, T data) throws SQLException {
+    private PreparedStatement setPrimaryKeyValue(PreparedStatement ps, T data, int parametarIndex) throws SQLException {
         Field primaryKeyField =tableInfo.getPrimaryField();
         primaryKeyField.setAccessible(true);
         Object keyData = null;
@@ -91,8 +98,7 @@ public class StatementBuilder<T> {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        ps.setObject(tableInfo.getNotAutoUpdateFieldNames().size() + 1, keyData);
-        System.out.println(ps);
+        ps.setObject(parametarIndex, keyData);
         return ps;
     }
 }

@@ -4,10 +4,7 @@ import com.ninja_squad.dbsetup.destination.Destination;
 import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
 import org.junit.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 
 abstract public class BaseDBTest {
@@ -66,6 +63,13 @@ abstract public class BaseDBTest {
         ps.executeUpdate();
         ps.executeUpdate();
         ps.executeUpdate();
+
+        String select = "SELECT * FROM USER;";
+        stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(select);
+        while (rs.next()) {
+            System.out.println(rs.getInt("ID") + " : " + rs.getString("NAME") + " : " + rs.getString("PASS"));
+        }
     }
 
     /**
@@ -73,11 +77,19 @@ abstract public class BaseDBTest {
      */
     @After
     public void deleteData() throws SQLException {
+        String select = "SELECT * FROM USER;";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(select);
+        while (rs.next()) {
+            System.out.println(rs.getInt("ID") + " : " + rs.getString("NAME") + " : " + rs.getString("PASS"));
+        }
+        System.out.println();
+
         String sql = "DELETE FROM USER";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.executeUpdate();
 
-        Statement stmt = con.createStatement();
+        stmt = con.createStatement();
         stmt.execute(dropTableSql);
     }
 
