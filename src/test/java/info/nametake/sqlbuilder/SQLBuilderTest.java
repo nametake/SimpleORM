@@ -85,9 +85,9 @@ public class SQLBuilderTest {
         StringBuffer sb = new StringBuffer();
         sb.append("UPDATE ");
         sb.append(tableInfo.getTableName());
-        sb.append(" SET (");
+        sb.append(" SET ");
         sb.append(String.join(" = ?, ", tableInfo.getNotAutoUpdateFieldNames()));
-        sb.append(" = ?) WHERE ID = ? ;");
+        sb.append(" = ? WHERE ID = ? ;");
         String expected = new String(sb);
 
         String actual = sqlBuilder.update();

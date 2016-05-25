@@ -64,8 +64,8 @@ public class SQLBuilder {
         sb.append(tableInfo.getTableName());
         sb.append(" ");
         sb.append(SET);
-        sb.append(getUpdateParams(fieldNames));
-        sb.append(" ");
+        sb.append(String.join(" = ?, ", fieldNames));
+        sb.append(" = ? ");
         sb.append(WHERE);
         sb.append(tableInfo.getPrimaryKeyName());
         sb.append(" = ? ");
