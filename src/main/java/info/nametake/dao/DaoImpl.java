@@ -12,17 +12,13 @@ import java.util.List;
 /**
  * Created by shogo on 2016/05/19.
  */
-class DaoImpl<T> implements Dao<T> {
+class DaoImpl<T> extends BaseDao<T> {
 
-    private final Connection connection;
-    private final Class<T> clazz;
-    private final TableInfo<T> tableInfo;
     private StatementBuilder<T> stmtBuilder;
     private StatementExecutor<T> stmtExecutor;
 
     public DaoImpl(Connection connection, Class<T> clazz) throws AnnotationException {
-        this.connection = connection;
-        this.clazz = clazz;
+        super(connection, clazz);
         this.tableInfo = new TableInfo<T>(clazz);
         this.stmtBuilder = new StatementBuilder<T>(connection, tableInfo);
         this.stmtExecutor = StatementExecutor.createStatementExecutor(connection, tableInfo);

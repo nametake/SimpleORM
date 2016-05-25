@@ -8,14 +8,14 @@ import java.sql.Connection;
  * Created by nameki-shogo on 2016/05/25.
  */
 public abstract class BaseDao<T> implements Dao<T> {
-    private Connection connection;
-    private Class<T> clazz;
-    private TableInfo<T> talbeInfo;
+    protected final Connection connection;
+    protected final Class<T> clazz;
+    protected TableInfo<T> tableInfo;
 
     public BaseDao(Connection connection, Class<T> clazz) throws AnnotationException {
         this.connection = connection;
         this.clazz = clazz;
-        this.talbeInfo = new TableInfo<T>(clazz);
+        this.tableInfo = new TableInfo<T>(clazz);
     }
 
 }
