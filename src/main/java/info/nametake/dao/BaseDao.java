@@ -15,7 +15,7 @@ public abstract class BaseDao<T> implements Dao<T> {
     public BaseDao(Connection connection, Class<T> clazz) throws AnnotationException {
         this.connection = connection;
         this.clazz = clazz;
-        this.talbeInfo = new TableInfo<>(clazz);
+        this.talbeInfo = new TableInfo<T>(clazz);
     }
 
 }
