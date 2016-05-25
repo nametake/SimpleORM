@@ -12,6 +12,7 @@ public class SQLBuilder {
     private static final String SELECT = "SELECT ";
     private static final String INSERT = "INSERT INTO ";
     private static final String UPDATE = "UPDATE ";
+    private static final String DELETE = "DELETE ";
     private static final String SET    = "SET ";
     private static final String VALUES = "VALUES ";
     private static final String FROM   = "FROM ";
@@ -87,13 +88,13 @@ public class SQLBuilder {
     }
 
     public String delete() {
-        StringBuffer sb = new StringBuffer(INSERT);
+        StringBuffer sb = new StringBuffer(DELETE);
+        sb.append(FROM);
         sb.append(tableInfo.getTableName());
         sb.append(" ");
-        sb.append(getRoundBrackets(String.join(", ", fieldNames)));
-        sb.append(" ");
-        sb.append(VALUES);
-        sb.append(getValuesQuestion(fieldNames.size()));
+        sb.append(WHERE);
+        sb.append(tableInfo.getPrimaryKeyName());
+        sb.append(" = ? ");
         sb.append(END);
         return new String(sb);
     }
