@@ -54,7 +54,7 @@ public class SQLBuilderTest {
         sb.append(" FROM ");
         sb.append(tableInfo.getTableName());
         sb.append(" WHERE ");
-        sb.append(tableInfo.getPrimaryKey());
+        sb.append(tableInfo.getPrimaryKeyName());
         sb.append(" = ");
         sb.append(id);
         sb.append(" ;");
@@ -87,9 +87,7 @@ public class SQLBuilderTest {
         sb.append(tableInfo.getTableName());
         sb.append(" SET (");
         sb.append(String.join(" = ?, ", tableInfo.getNotAutoUpdateFieldNames()));
-        sb.append(" = ?) WHERE ID = ");
-        sb.append(user.getId());
-        sb.append(" ;");
+        sb.append(" = ?) WHERE ID = ? ;");
         String expected = new String(sb);
 
         String actual = sqlBuilder.update();
