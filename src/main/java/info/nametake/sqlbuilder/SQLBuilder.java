@@ -86,6 +86,18 @@ public class SQLBuilder {
         return new String(sb);
     }
 
+    public String delete() {
+        StringBuffer sb = new StringBuffer(INSERT);
+        sb.append(tableInfo.getTableName());
+        sb.append(" ");
+        sb.append(getRoundBrackets(String.join(", ", fieldNames)));
+        sb.append(" ");
+        sb.append(VALUES);
+        sb.append(getValuesQuestion(fieldNames.size()));
+        sb.append(END);
+        return new String(sb);
+    }
+
     /**
      * カンマ区切りのフィールド名を取得
      * @return カンマ区切りのフィールドの文字列

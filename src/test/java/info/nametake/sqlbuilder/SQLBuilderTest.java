@@ -71,7 +71,15 @@ public class SQLBuilderTest {
     public void testDelete() {
         // Create sql
         StringBuffer sb = new StringBuffer();
+        sb.append("DELETE FROM ");
+        sb.append(tableInfo.getTableName());
+        sb.append(" WHERE ID = ? ;");
         String expected = new String(sb);
+
+        String actual = sqlBuilder.delete();
+        System.out.println("Expected :" + expected);
+        System.out.println("Actual   :" + actual);
+        assertThat(expected, is(actual));
     }
 
     @Test
