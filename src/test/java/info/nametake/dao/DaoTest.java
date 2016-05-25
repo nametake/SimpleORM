@@ -84,7 +84,17 @@ public class DaoTest extends BaseDBTest {
     @Test
     public void testDelete() throws SQLException {
         int result = userDao.delete(user);
-        //assertThat(0, is(not(result)));
+        assertThat(0, is(not(result)));
+    }
+
+    @Test
+    public void testUpdate() throws SQLException {
+        User user = new User();
+        user.setId(2);
+        user.setName("Jiro");
+        user.setPassword("1234");
+        int result = userDao.update(user);
+        assertThat(0, is(not(result)));
     }
 
     @Test
