@@ -11,6 +11,7 @@ import java.util.List;
 public class SQLBuilder {
     private static final String SELECT = "SELECT ";
     private static final String INSERT = "INSERT INTO ";
+    private static final String UPDATE = "UPDATE ";
     private static final String SET    = "SET ";
     private static final String VALUES = "VALUES ";
     private static final String FROM   = "FROM ";
@@ -58,7 +59,17 @@ public class SQLBuilder {
      * @return
      */
     public String update() {
-        StringBuffer sb = new StringBuffer();
+        List<String> fieldNames = tableInfo.getNotAutoUpdateFieldNames();
+        StringBuffer sb = new StringBuffer(UPDATE);
+        sb.append(tableInfo.getTableName());
+        sb.append(" ");
+        sb.append(SET);
+        sb.append(String.join(" = ?, ", fieldNames));
+        sb.append(" = ? ");
+        sb.append(WHERE);
+        sb.append(tableInfo.getPrimaryKeyName());
+        sb.append(" = ? ");
+        sb.append(END);
         return new String(sb);
     }
 
@@ -103,7 +114,7 @@ public class SQLBuilder {
      */
     private String getWhereById(int id) {
         StringBuffer sb = new StringBuffer(WHERE);
-        sb.append(tableInfo.getPrimaryKey());
+        sb.append(tableInfo.getPrimaryKeyName());
         sb.append(EQ);
         sb.append(id);
         sb.append(" ");
@@ -125,6 +136,12 @@ public class SQLBuilder {
             list.add("?");
         }
         return getRoundBrackets(String.join(", ", list));
+    }
+
+    private String getUpdateParams(List<String> fieldNames) {
+        StringBuffer sb = new StringBuffer( String.join(" = ?, ", fieldNames) );
+        sb.append(" = ?");
+        return getRoundBrackets(new String(sb));
     }
 
 }

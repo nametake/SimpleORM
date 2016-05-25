@@ -44,6 +44,14 @@ public class StatementBuilder<T> {
         return setValues(ps, data);
     }
 
+    public PreparedStatement getUpdateStatement(T data) throws SQLException {
+        String sql = sqlBuilder.update();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps = setValues(ps, data);
+        ps = setPrimaryKeyValue(ps, data);
+        return ps;
+    }
+
     private PreparedStatement setValues(PreparedStatement ps, T data) throws SQLException {
         // loop
         for (Field field : tableInfo.getClazz().getDeclaredFields()) {
@@ -56,7 +64,7 @@ public class StatementBuilder<T> {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-            // 何番目のデータ化を取得
+            // 何番目のデータかを取得
             int order = tableInfo.getNotAutoUpdateFieldNames().indexOf(df.columnName());
             if (order == -1) {
                 continue;
@@ -71,6 +79,20 @@ public class StatementBuilder<T> {
                 ps.setDate(order, new Date((Long) value));
             }
         }
+        return ps;
+    }
+
+    private PreparedStatement setPrimaryKeyValue(PreparedStatement ps, T data) throws SQLException {
+        Field primaryKeyField =tableInfo.getPrimaryField();
+        primaryKeyField.setAccessible(true);
+        Object keyData = null;
+        try {
+            keyData = primaryKeyField.get(data);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        ps.setObject(tableInfo.getNotAutoUpdateFieldNames().size() + 1, keyData);
+        System.out.println(ps);
         return ps;
     }
 }

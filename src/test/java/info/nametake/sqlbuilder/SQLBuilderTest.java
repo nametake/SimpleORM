@@ -54,7 +54,7 @@ public class SQLBuilderTest {
         sb.append(" FROM ");
         sb.append(tableInfo.getTableName());
         sb.append(" WHERE ");
-        sb.append(tableInfo.getPrimaryKey());
+        sb.append(tableInfo.getPrimaryKeyName());
         sb.append(" = ");
         sb.append(id);
         sb.append(" ;");
@@ -76,9 +76,24 @@ public class SQLBuilderTest {
 
     @Test
     public void testUpdate() {
+        User user = new User();
+        user.setId(2);
+        user.setName("Saburo");
+        user.setPassword("1357");
+
         // Create sql
         StringBuffer sb = new StringBuffer();
+        sb.append("UPDATE ");
+        sb.append(tableInfo.getTableName());
+        sb.append(" SET ");
+        sb.append(String.join(" = ?, ", tableInfo.getNotAutoUpdateFieldNames()));
+        sb.append(" = ? WHERE ID = ? ;");
         String expected = new String(sb);
+
+        String actual = sqlBuilder.update();
+        System.out.println("Expected :" + expected);
+        System.out.println("Actual   :" + actual);
+        assertThat(expected, is(actual));
     }
 
     @Test

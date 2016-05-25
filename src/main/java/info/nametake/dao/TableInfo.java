@@ -17,7 +17,8 @@ public class TableInfo<T> {
     // Table info
     private final DatabaseTable table;
     private List<DatabaseField> fields;
-    private DatabaseField primaryField;
+    private DatabaseField primaryDatabaseField;
+    private Field primaryField;
 
     public TableInfo(Class<T> clazz) throws AnnotationException {
         this.clazz = clazz;
@@ -28,19 +29,24 @@ public class TableInfo<T> {
             throw new AnnotationException();
         }
         // Set field
-        primaryField = null;
+        primaryDatabaseField = null;
         fields = new ArrayList<DatabaseField>();
         for (Field field : clazz.getDeclaredFields()) {
             DatabaseField dbf = field.getAnnotation(DatabaseField.class);
             fields.add(dbf);
             if (dbf.primaryKey()) {
-                primaryField = dbf;
+                primaryField = field;
+                primaryDatabaseField = dbf;
             }
         }
     }
 
     public Class<T> getClazz() {
         return clazz;
+    }
+
+    public Field getPrimaryField() {
+        return primaryField;
     }
 
     public String getTableName() {
@@ -65,8 +71,8 @@ public class TableInfo<T> {
         return list;
     }
 
-    public String getPrimaryKey() {
-        return primaryField.columnName();
+    public String getPrimaryKeyName() {
+        return primaryDatabaseField.columnName();
     }
 
 }
