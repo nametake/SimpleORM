@@ -13,4 +13,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface DatabaseTable {
     String tableName();
+    Class<?> daoClass() default Void.class;
 }

@@ -25,7 +25,7 @@ public class DaoTest extends BaseDBTest {
     private User user = null;
 
     @BeforeClass
-    public static void createDao() throws AnnotationException {
+    public static void createDao() throws AnnotationException, SQLException {
         userDao = DaoFacotry.createDao(con, User.class);
     }
 
@@ -54,14 +54,14 @@ public class DaoTest extends BaseDBTest {
     }
 
     @Test
-    public void testCreateDao() throws AnnotationException {
+    public void testCreateDao() throws AnnotationException, SQLException {
         System.out.println("CREATE DAO");
         Dao<User> userDao = DaoFacotry.createDao(con, User.class);
         assertThat(userDao, instanceOf(Dao.class));
     }
 
     @Test(expected = AnnotationException.class)
-    public void testNotTableAnnotation() throws AnnotationException {
+    public void testNotTableAnnotation() throws AnnotationException, SQLException {
         System.out.println("NOT TABLE ANNOTATION");
         Dao<User> userDao = DaoFacotry.createDao(con, NotAnnotationModel.class);
     }
