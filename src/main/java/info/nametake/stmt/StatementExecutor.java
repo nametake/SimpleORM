@@ -3,6 +3,7 @@ package info.nametake.stmt;
 import info.nametake.dao.TableInfo;
 import info.nametake.db.DatabaseField;
 import info.nametake.exception.AnnotationException;
+import org.h2.engine.Database;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -95,7 +96,11 @@ public class StatementExecutor<T> {
             instance = clazz.newInstance();
             for (Field field : clazz.getDeclaredFields()) {
                 field.setAccessible(true);
-                String fieldName = field.getAnnotation(DatabaseField.class).columnName();
+                DatabaseField dbf = field.getAnnotation(DatabaseField.class);
+                if (dbf == null) {
+                    continue;
+                }
+                String fieldName = dbf.columnName();
                 field.set(instance, resultSet.getObject(fieldName));
             }
         } catch (InstantiationException e) {

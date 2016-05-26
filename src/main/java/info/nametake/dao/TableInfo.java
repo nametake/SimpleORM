@@ -33,11 +33,17 @@ public class TableInfo<T> {
         fields = new ArrayList<DatabaseField>();
         for (Field field : clazz.getDeclaredFields()) {
             DatabaseField dbf = field.getAnnotation(DatabaseField.class);
+            if (dbf == null) {
+                continue;
+            }
             fields.add(dbf);
             if (dbf.primaryKey()) {
                 primaryField = field;
                 primaryDatabaseField = dbf;
             }
+        }
+        if (fields.size() == 0) {
+            throw new AnnotationException();
         }
     }
 

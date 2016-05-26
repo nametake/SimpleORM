@@ -19,7 +19,7 @@ public class DaoFacotry {
             throw new AnnotationException();
         }
 
-        Dao<T> dao = null;
+        Dao<?> dao = null;
         if (databaseTable.daoClass() == Void.class) {
             // Create Dao
             dao = new DaoImpl<T>(connection, clazz);
@@ -32,7 +32,7 @@ public class DaoFacotry {
                 throw new SQLException();
             }
             try {
-                dao = (Dao<T>) daoConstructor.newInstance(argments);
+                dao = (Dao<?>) daoConstructor.newInstance(argments);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
