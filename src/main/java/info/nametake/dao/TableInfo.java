@@ -42,9 +42,6 @@ public class TableInfo<T> {
                 primaryDatabaseField = dbf;
             }
         }
-        if (fields.size() == 0) {
-            throw new AnnotationException();
-        }
     }
 
     public Class<T> getClazz() {

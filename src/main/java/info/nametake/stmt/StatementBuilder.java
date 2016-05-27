@@ -6,10 +6,7 @@ import info.nametake.db.DatabaseField;
 import info.nametake.sqlbuilder.SQLBuilder;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by shogo on 2016/05/22.
@@ -64,6 +61,14 @@ public class StatementBuilder<T> {
         for (Field field : tableInfo.getClazz().getDeclaredFields()) {
             field.setAccessible(true);
             DatabaseField df = field.getAnnotation(DatabaseField.class);
+
+            // 何番目のデータかを取得
+            int order = tableInfo.getNotAutoUpdateFieldNames().indexOf(df.columnName());
+            if (order == -1) {
+                continue;
+            }
+            order += 1;
+
             // データを取得
             Object value = null;
             try {
@@ -71,19 +76,28 @@ public class StatementBuilder<T> {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-            // 何番目のデータかを取得
-            int order = tableInfo.getNotAutoUpdateFieldNames().indexOf(df.columnName());
-            if (order == -1) {
-                continue;
-            }
-            // タイプによってセットメソッドを切り替え
-            order += 1;
-            if (df.dataType().equals(DataType.INT)) {
+
+            // データをセット
+            if (value == null) {
+                // TODO:キモいのでリファクタリング
+                // NULL データを挿入
+                if (df.dataType().equals(DataType.INT)) {
+                    ps.setNull(order, Types.INTEGER);
+                } else if (df.dataType().equals(DataType.STRING)) {
+                    ps.setNull(order, Types.VARCHAR);
+                } else if (df.dataType().equals(DataType.DATETIME)) {
+                    ps.setNull(order, Types.DATE);
+                } else {
+                    ps.setNull(order, Types.VARCHAR);
+                }
+            } else if (df.dataType().equals(DataType.INT)) {
                 ps.setInt(order, (Integer) value);
             } else if (df.dataType().equals(DataType.STRING)) {
                 ps.setString(order, (String) value);
             } else if (df.dataType().equals(DataType.DATETIME)) {
-                ps.setDate(order, new Date((Long) value));
+                ps.setDate(order, new Date( ((Timestamp) value).getTime()));
+            } else {
+                ps.setObject(order, value);
             }
         }
         return ps;

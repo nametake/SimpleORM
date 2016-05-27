@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface DatabaseField {
     String columnName();
-    DataType dataType();
+    DataType dataType() default DataType.NONE;
     boolean primaryKey() default false;
     boolean autoIncrement() default false;
     boolean timeStamp() default false;
