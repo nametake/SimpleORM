@@ -14,10 +14,16 @@ abstract public class BaseDBTest {
     protected static Destination destination = new DriverManagerDestination(url, user, pass);
     protected static Connection con;
 
-    private static String dropTableSql = "DROP TABLE IF EXISTS USER;";
-    private static String createTableSql = "CREATE TABLE IF NOT EXISTS " +
-            "USER (ID INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(12), PASS VARCHAR(12));";
+    protected static String tableName = "USER";
+    protected static String fieldNameId = "ID";
+    protected static String fieldNameName = "NAME";
+    protected static String fieldNamePass = "PASS";
 
+    private static String dropTableSql = "DROP TABLE IF EXISTS " + tableName + ";";
+    private static String createTableSql = "CREATE TABLE IF NOT EXISTS " +
+            tableName + " (" + fieldNameId + " INT PRIMARY KEY AUTO_INCREMENT, " +
+            fieldNameName + " VARCHAR(32), " +
+            fieldNamePass + " VARCHAR(32));";
 
     // データベースのデータ
     protected static String username = "Taro";

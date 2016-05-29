@@ -47,11 +47,23 @@ public class SQLBuilder {
      * @return
      */
     public String selectById(int id) {
+        // TODO: IDを直接指定しているのを修正
         StringBuffer sb = new StringBuffer();
         sb.append(SELECT);
         sb.append(getCommaSeparatedField());
         sb.append(getFromTable());
         sb.append(getWhereById(id));
+        sb.append(END);
+        return new String(sb);
+    }
+
+    public String selectByField(String field) {
+        // TODO:
+        StringBuffer sb = new StringBuffer();
+        sb.append(SELECT);
+        sb.append(getCommaSeparatedField());
+        sb.append(getFromTable());
+        sb.append(getWhere(field));
         sb.append(END);
         return new String(sb);
     }
@@ -117,6 +129,14 @@ public class SQLBuilder {
         StringBuffer sb = new StringBuffer(FROM);
         sb.append(tableInfo.getTableName());
         sb.append(" ");
+        return new String(sb);
+    }
+
+    private String getWhere(String fieldName) {
+        StringBuffer sb = new StringBuffer(WHERE);
+        sb.append(fieldName);
+        sb.append(EQ);
+        sb.append("? ");
         return new String(sb);
     }
 

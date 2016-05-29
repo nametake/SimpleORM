@@ -26,6 +26,10 @@ public class SampleDao<T> extends BaseDao<T>{
         return null;
     }
 
+    public T selectByField(String fieldName, Object value) throws SQLException {
+        return null;
+    }
+
     @Override
     public List<T> selectAll() throws SQLException {
         return null;
