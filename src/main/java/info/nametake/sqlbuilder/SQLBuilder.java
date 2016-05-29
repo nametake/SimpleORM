@@ -62,7 +62,7 @@ public class SQLBuilder {
         sb.append(SELECT);
         sb.append(getCommaSeparatedField());
         sb.append(getFromTable());
-        sb.append(getWhereById(id));
+        sb.append(getWhere(field));
         sb.append(END);
         return new String(sb);
     }
@@ -128,6 +128,14 @@ public class SQLBuilder {
         StringBuffer sb = new StringBuffer(FROM);
         sb.append(tableInfo.getTableName());
         sb.append(" ");
+        return new String(sb);
+    }
+
+    private String getWhere(String fieldName) {
+        StringBuffer sb = new StringBuffer(WHERE);
+        sb.append(fieldName);
+        sb.append(EQ);
+        sb.append("? ");
         return new String(sb);
     }
 

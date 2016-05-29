@@ -77,8 +77,9 @@ public class SQLBuilderTest {
         sb.append(String.join(", ", tableInfo.getFieldNames()));
         sb.append(" FROM ");
         sb.append(tableInfo.getTableName());
-        sb.append(" WHERE PASS = ");
-        sb.append(" ;");
+        sb.append(" WHERE ");
+        sb.append(fieldName);
+        sb.append(" = ? ;");
         String expected = new String(sb);
 
         // Get select by id sql
