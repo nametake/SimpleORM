@@ -34,7 +34,7 @@ public class StatementBuilder<T> {
         return ps;
     }
 
-    public PreparedStatement getSelectByFieldStatement(int fieldName) throws SQLException {
+    public PreparedStatement getSelectByFieldStatement(String fieldName) throws SQLException {
         String sql = sqlBuilder.selectByField(fieldName);
         PreparedStatement ps = connection.prepareStatement(sql);
         return ps;
