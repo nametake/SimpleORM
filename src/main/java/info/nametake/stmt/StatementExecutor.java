@@ -80,10 +80,12 @@ public class StatementExecutor<T> {
     }
 
     public int update(PreparedStatement ps) throws SQLException {
-        ps.executeUpdate();
+        int updateResult = ps.executeUpdate();
         ResultSet rs = ps.getGeneratedKeys();
-        rs.next();
-        return rs.getInt(1);
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        return updateResult;
     }
 
     /**

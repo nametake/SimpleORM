@@ -86,19 +86,23 @@ public class StatementExecutorTest extends BaseDBTest {
 
     @Test
     public void testUpdate() throws Exception {
-        String username = "hoge";
-        String password = "eyhdjf";
-        User user = new User();
-        user.setName(username);
-        user.setPassword(password);
+        // StatementExecutorを作成
         StatementExecutor<User> stmte
                 = StatementExecutor.createStatementExecutor(con, User.class);
-        int id = stmte.update(stmtBuilder.getUpdateStatement(user));
+        // ユーザIDが1のユーザをSelect
+        User selectUser = stmte.execute(stmtBuilder.getSelectByIdStatement(2)).get(0);
+        selectUser.setName("foo");
+        selectUser.setPassword("foobar");
 
-        User selectUser = stmte.execute(stmtBuilder.getSelectByIdStatement(id)).get(0);
+        // Update
+        stmte.update(stmtBuilder.getUpdateStatement(selectUser));
+        int id = selectUser.getId();
 
-        assertThat(username, is(selectUser.getName()));
-        assertThat(password, is(selectUser.getPassword()));
+        // アップデート
+        User updatedUser = stmte.execute(stmtBuilder.getSelectByIdStatement(id)).get(0);
+
+        assertThat(selectUser.getName(), is(updatedUser.getName()));
+        assertThat(selectUser.getPassword(), is(updatedUser.getPassword()));
 
     }
 }
