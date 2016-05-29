@@ -56,6 +56,17 @@ public class SQLBuilder {
         return new String(sb);
     }
 
+    public String selectByField(String field) {
+        // TODO:
+        StringBuffer sb = new StringBuffer();
+        sb.append(SELECT);
+        sb.append(getCommaSeparatedField());
+        sb.append(getFromTable());
+        sb.append(getWhereById(id));
+        sb.append(END);
+        return new String(sb);
+    }
+
     /**
      * @return
      */

@@ -68,6 +68,27 @@ public class SQLBuilderTest {
     }
 
     @Test
+    public void testSelectByField() {
+        String fieldName = "NAME";
+
+        // Create sql
+        StringBuffer sb = new StringBuffer();
+        sb.append("SELECT ");
+        sb.append(String.join(", ", tableInfo.getFieldNames()));
+        sb.append(" FROM ");
+        sb.append(tableInfo.getTableName());
+        sb.append(" WHERE PASS = ");
+        sb.append(" ;");
+        String expected = new String(sb);
+
+        // Get select by id sql
+        String actual = sqlBuilder.selectByField(fieldName);
+        System.out.println("Expected :" + expected);
+        System.out.println("Actual   :" + actual);
+        assertThat(expected, is(actual));
+    }
+
+    @Test
     public void testDelete() {
         // Create sql
         StringBuffer sb = new StringBuffer();
