@@ -68,6 +68,39 @@ public class StatementExecutorTest extends BaseDBTest {
     }
 
     @Test
+    public void testSelectByField() throws AnnotationException, SQLException {
+        // Create User
+        String n = "Shimamura Uduki";
+        String p = "Ganbarimasu!";
+        User insertUser = new User();
+        insertUser.setName(n);
+        insertUser.setPassword(p);
+
+        // Insert
+        StatementExecutor<User> stmte
+                = StatementExecutor.createStatementExecutor(con, User.class);
+        int id = stmte.insertAutoIncrementedId(stmtBuilder.getInsertStatement(insertUser));
+
+
+        List<User> list = null;
+        User user = null;
+        // NAME フィールドが一致するかを確認
+        list = stmte.execute(stmtBuilder.getSelectByFieldStatement(fieldNameName, n));
+        assertThat(1, is(list.size()));
+        user = list.get(0);
+        assertThat(user, instanceOf(User.class));
+        assertThat(n, is(user.getName()));
+
+        // NAME フィールドが一致するかを確認
+        list = stmte.execute(stmtBuilder.getSelectByFieldStatement(fieldNamePass, p));
+        assertThat(1, is(list.size()));
+        user = list.get(0);
+        assertThat(user, instanceOf(User.class));
+        assertThat(p, is(user.getPassword()));
+
+    }
+
+    @Test
     public void testInsert() throws Exception {
         String username = "hoge";
         String password = "ghmcka";
