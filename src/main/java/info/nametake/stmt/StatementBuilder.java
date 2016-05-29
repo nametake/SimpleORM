@@ -34,6 +34,12 @@ public class StatementBuilder<T> {
         return ps;
     }
 
+    public PreparedStatement getSelectByFieldStatement(int fieldName) throws SQLException {
+        String sql = sqlBuilder.selectByField(fieldName);
+        PreparedStatement ps = connection.prepareStatement(sql);
+        return ps;
+    }
+
     public PreparedStatement getInsertStatement(T data) throws SQLException {
         String sql = sqlBuilder.insert();
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
