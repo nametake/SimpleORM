@@ -26,8 +26,8 @@ abstract public class BaseDBTest {
             fieldNamePass + " VARCHAR(32));";
 
     // データベースのデータ
-    protected static String username = "Taro";
-    protected static String password = "rota";
+    protected static String username = "Rin Shibuya";
+    protected static String password = "antaga watashi no Producer?";
 
 
     /**
@@ -69,6 +69,10 @@ abstract public class BaseDBTest {
         ps.executeUpdate();
         ps.executeUpdate();
         ps.executeUpdate();
+        String s = "INSERT INTO USER (NAME, PASS) VALUES ('" + username + "', '" + password + "');";
+        ps = con.prepareStatement(s);
+        ps.executeUpdate();
+
 
         String select = "SELECT * FROM USER;";
         stmt = con.createStatement();

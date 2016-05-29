@@ -39,7 +39,13 @@ class DaoImpl<T> extends BaseDao<T> {
     }
 
     public T selectByField(String fieldName, Object value) throws SQLException {
-        return null;
+        PreparedStatement ps = stmtBuilder.getSelectByFieldStatement(fieldName, value);
+        List<T> list = stmtExecutor.execute(ps);
+        if (list.size() < 1) {
+            throw new  SQLException();
+        }
+
+        return list.get(0);
     }
 
     public List<T> selectAll() throws SQLException {
