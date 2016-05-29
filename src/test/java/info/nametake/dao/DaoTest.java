@@ -130,6 +130,9 @@ public class DaoTest extends BaseDBTest {
         System.out.println("SELECT BY FIELD");
         User user = userDao.selectByField(fieldNameName, username);
         assertThat(username, is(user.getName()));
+        user = userDao.selectByField(fieldNamePass, password);
+        assertThat(password, is(user.getPassword()));
+
 
     }
 }
