@@ -95,7 +95,8 @@ public class StatementExecutorTest extends BaseDBTest {
         selectUser.setPassword("foobar");
 
         // Update
-        stmte.update(stmtBuilder.getUpdateStatement(selectUser));
+        int result = stmte.update(stmtBuilder.getUpdateStatement(selectUser));
+        assertThat(1, is(result));
         int id = selectUser.getId();
 
         // アップデート
