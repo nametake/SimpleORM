@@ -41,7 +41,7 @@ public class DaoTest extends BaseDBTest {
     public void createUser() {
         user = new User();
         user.setId(10);
-        user.setName("Taro");
+        user.setName("Tarooooo");
         user.setPassword("pass");
     }
 
@@ -81,8 +81,10 @@ public class DaoTest extends BaseDBTest {
     @Test
     public void testInsert() throws SQLException {
         System.out.println("INSERT");
-        int result = userDao.insert(user);
-        assertThat(1, is(result));
+        int id = userDao.insert(user);
+        User u = userDao.selectById(id);
+        assertThat(user.getName(), is(u.getName()));
+        assertThat(user.getPassword(), is(u.getPassword()));
     }
 
     @Test

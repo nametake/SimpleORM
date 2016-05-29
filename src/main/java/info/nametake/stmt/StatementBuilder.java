@@ -36,7 +36,7 @@ public class StatementBuilder<T> {
 
     public PreparedStatement getInsertStatement(T data) throws SQLException {
         String sql = sqlBuilder.insert();
-        PreparedStatement ps = connection.prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         return setValues(ps, data);
     }
 

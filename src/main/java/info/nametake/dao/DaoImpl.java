@@ -50,7 +50,7 @@ class DaoImpl<T> extends BaseDao<T> {
 
     public int insert(T data) throws SQLException {
         PreparedStatement ps = stmtBuilder.getInsertStatement(data);
-        return stmtExecutor.update(ps);
+        return stmtExecutor.insertAutoIncrementedId(ps);
     }
 
     public int delete(T data) throws SQLException {
