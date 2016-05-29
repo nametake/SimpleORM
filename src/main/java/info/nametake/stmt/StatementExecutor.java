@@ -80,12 +80,15 @@ public class StatementExecutor<T> {
     }
 
     public int update(PreparedStatement ps) throws SQLException {
-        int updateResult = ps.executeUpdate();
+        return ps.executeUpdate();
+    }
+
+    public int insertAutoIncrementedId(PreparedStatement ps) throws SQLException {
         ResultSet rs = ps.getGeneratedKeys();
         if (rs.next()) {
             return rs.getInt(1);
         }
-        return updateResult;
+        throw new SQLException();
     }
 
     /**
