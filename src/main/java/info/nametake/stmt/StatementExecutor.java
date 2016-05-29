@@ -84,6 +84,7 @@ public class StatementExecutor<T> {
     }
 
     public int insertAutoIncrementedId(PreparedStatement ps) throws SQLException {
+        ps.executeUpdate();
         ResultSet rs = ps.getGeneratedKeys();
         if (rs.next()) {
             return rs.getInt(1);

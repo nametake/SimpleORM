@@ -76,7 +76,7 @@ public class StatementExecutorTest extends BaseDBTest {
         user.setPassword(password);
         StatementExecutor<User> stmte
                 = StatementExecutor.createStatementExecutor(con, User.class);
-        int id = stmte.update(stmtBuilder.getInsertStatement(user));
+        int id = stmte.insertAutoIncrementedId(stmtBuilder.getInsertStatement(user));
 
         User selectUser = stmte.execute(stmtBuilder.getSelectByIdStatement(id)).get(0);
 
