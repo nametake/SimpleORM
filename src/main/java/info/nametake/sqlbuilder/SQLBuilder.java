@@ -47,6 +47,7 @@ public class SQLBuilder {
      * @return
      */
     public String selectById(int id) {
+        // TODO: IDを直接指定しているのを修正
         StringBuffer sb = new StringBuffer();
         sb.append(SELECT);
         sb.append(getCommaSeparatedField());

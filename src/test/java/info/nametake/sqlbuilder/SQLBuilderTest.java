@@ -44,6 +44,7 @@ public class SQLBuilderTest {
 
     @Test
     public void testSelectById() {
+        // TODO: IDをPreparedStatementを利用して入力するように変更
         // ID
         int id = 1;
 
