@@ -3,7 +3,6 @@ package info.nametake.stmt;
 import info.nametake.dao.TableInfo;
 import info.nametake.db.DatabaseField;
 import info.nametake.exception.AnnotationException;
-import org.h2.engine.Database;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -81,7 +80,10 @@ public class StatementExecutor<T> {
     }
 
     public int update(PreparedStatement ps) throws SQLException {
-        return ps.executeUpdate();
+        ps.executeUpdate();
+        ResultSet rs = ps.getGeneratedKeys();
+        rs.next();
+        return rs.getInt(1);
     }
 
     /**

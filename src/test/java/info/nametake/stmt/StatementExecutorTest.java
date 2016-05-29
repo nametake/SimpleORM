@@ -67,5 +67,38 @@ public class StatementExecutorTest extends BaseDBTest {
         assertThat(id, is(user.getId()));
     }
 
+    @Test
+    public void testInsert() throws Exception {
+        String username = "hoge";
+        String password = "ghmcka";
+        User user = new User();
+        user.setName(username);
+        user.setPassword(password);
+        StatementExecutor<User> stmte
+                = StatementExecutor.createStatementExecutor(con, User.class);
+        int id = stmte.update(stmtBuilder.getInsertStatement(user));
 
+        User selectUser = stmte.execute(stmtBuilder.getSelectByIdStatement(id)).get(0);
+
+        assertThat(username, is(selectUser.getName()));
+        assertThat(password, is(selectUser.getPassword()));
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        String username = "hoge";
+        String password = "eyhdjf";
+        User user = new User();
+        user.setName(username);
+        user.setPassword(password);
+        StatementExecutor<User> stmte
+                = StatementExecutor.createStatementExecutor(con, User.class);
+        int id = stmte.update(stmtBuilder.getUpdateStatement(user));
+
+        User selectUser = stmte.execute(stmtBuilder.getSelectByIdStatement(id)).get(0);
+
+        assertThat(username, is(selectUser.getName()));
+        assertThat(password, is(selectUser.getPassword()));
+
+    }
 }
