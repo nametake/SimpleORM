@@ -102,7 +102,7 @@ public class StatementBuilder<T> {
             } else if (df.dataType().equals(DataType.STRING)) {
                 ps.setString(order, (String) value);
             } else if (df.dataType().equals(DataType.DATETIME)) {
-                ps.setDate(order, new Date( ((Timestamp) value).getTime()));
+                ps.setTimestamp(order, (Timestamp) value);
             } else {
                 ps.setObject(order, value);
             }
