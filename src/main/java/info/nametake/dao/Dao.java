@@ -29,7 +29,7 @@ public interface Dao<T> {
      * @return ジェネリクスで指定したモデルのオブジェクト
      * @throws SQLException
      */
-    public T selectByField(String fieldName, Object value) throws SQLException;
+    public List<T> selectByField(String fieldName, Object value) throws SQLException;
 
     /**
      * 対象とするモデルの全てのデータを取得

@@ -128,9 +128,9 @@ public class DaoTest extends BaseDBTest {
     @Test
     public void testSelectByField() throws SQLException {
         System.out.println("SELECT BY FIELD");
-        User user = userDao.selectByField(fieldNameName, username);
+        User user = userDao.selectByField(fieldNameName, username).get(0);
         assertThat(username, is(user.getName()));
-        user = userDao.selectByField(fieldNamePass, password);
+        user = userDao.selectByField(fieldNamePass, password).get(0);
         assertThat(password, is(user.getPassword()));
 
 

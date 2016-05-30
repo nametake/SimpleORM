@@ -26,7 +26,7 @@ public class SampleDao<T> extends BaseDao<T>{
         return null;
     }
 
-    public T selectByField(String fieldName, Object value) throws SQLException {
+    public List<T> selectByField(String fieldName, Object value) throws SQLException {
         return null;
     }
 
