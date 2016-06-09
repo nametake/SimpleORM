@@ -69,4 +69,14 @@ public interface Dao<T> {
      * @throws SQLException
      */
     public int deleteById(int id) throws SQLException;
+
+    /**
+     *
+     * フィールド名と値を指定したDELETE文を実行
+     * @param fieldName: カラム名
+     * @param value: 値
+     * @return 変更された行数
+     * @throws SQLException
+     */
+    public int deleteByField(String fieldName, Object value) throws SQLException;
 }

@@ -7,16 +7,26 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 /**
  * Created by nameki-shogo on 2016/05/19.
  */
 public class DaoFacotry {
+
+    public static HashMap<Class<?>, Dao<?>> daoCache = new HashMap<>();
+
     public static <D extends Dao<?>, T> D createDao(Connection connection, Class<T> clazz) throws AnnotationException, SQLException {
+
         // Check decorated DatabaseTalbe annotation
         DatabaseTable databaseTable = clazz.getAnnotation(DatabaseTable.class);
         if (databaseTable == null) {
             throw new AnnotationException();
+        }
+
+        // Cache check
+        if (daoCache.containsKey(clazz)) {
+            return (D) daoCache.get(clazz);
         }
 
         Dao<?> dao = null;
@@ -41,10 +51,10 @@ public class DaoFacotry {
                 e.printStackTrace();
             }
         }
+        daoCache.put(clazz, dao);
         return (D) dao;
-
-
     }
+
     private static Constructor<?> findConstructor(Class<?> daoClass, Object[] params) {
         for (Constructor<?> constructor : daoClass.getConstructors()) {
             Class<?>[] paramsTypes = constructor.getParameterTypes();

@@ -60,7 +60,20 @@ public class StatementBuilder<T> {
         PreparedStatement ps = connection.prepareStatement(sql);
         ps = setPrimaryKeyValue(ps, data, 1);
         return ps;
+    }
 
+    public PreparedStatement getDeleteByIdStatement(int id) throws SQLException {
+        String sql = sqlBuilder.delete();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
+        return ps;
+    }
+
+    public PreparedStatement getDeleteByFieldStatement(String fieldName, Object value) throws SQLException {
+        String sql = sqlBuilder.deleteByField(fieldName);
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setObject(1, value);
+        return ps;
     }
 
     private PreparedStatement setValues(PreparedStatement ps, T data) throws SQLException {

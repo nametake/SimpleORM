@@ -54,4 +54,9 @@ public class SampleDao<T> extends BaseDao<T>{
     public int deleteById(int id) throws SQLException {
         return 0;
     }
+
+    @Override
+    public int deleteByField(String fieldName, Object value) throws SQLException {
+        return 0;
+    }
 }

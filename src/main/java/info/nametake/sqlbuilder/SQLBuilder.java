@@ -111,6 +111,18 @@ public class SQLBuilder {
         return new String(sb);
     }
 
+    public String deleteByField(String fieldName) {
+        StringBuffer sb = new StringBuffer(DELETE);
+        sb.append(FROM);
+        sb.append(tableInfo.getTableName());
+        sb.append(" ");
+        sb.append(WHERE);
+        sb.append(fieldName);
+        sb.append(" = ? ");
+        sb.append(END);
+        return new String(sb);
+    }
+
     /**
      * カンマ区切りのフィールド名を取得
      * @return カンマ区切りのフィールドの文字列

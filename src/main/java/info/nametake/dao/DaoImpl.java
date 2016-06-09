@@ -69,7 +69,13 @@ class DaoImpl<T> extends BaseDao<T> {
     }
 
     public int deleteById(int id) throws SQLException {
-        return 0;
+        PreparedStatement ps = stmtBuilder.getDeleteByIdStatement(id);
+        return stmtExecutor.update(ps);
+    }
+
+    public int deleteByField(String fieldName, Object value) throws SQLException {
+        PreparedStatement ps = stmtBuilder.getDeleteByFieldStatement(fieldName, value);
+        return stmtExecutor.update(ps);
     }
 
 }

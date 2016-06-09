@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -139,4 +140,38 @@ public class StatementExecutorTest extends BaseDBTest {
         assertThat(selectUser.getPassword(), is(updatedUser.getPassword()));
 
     }
+
+    @Test
+    public void testDelete() throws Exception {
+        // StatementExecutorを作成
+        StatementExecutor<User> stmte
+                = StatementExecutor.createStatementExecutor(con, User.class);
+        // ユーザIDが1のユーザをSelect
+        User selectUser = stmte.execute(stmtBuilder.getSelectByIdStatement(2)).get(0);
+
+        // アップデート
+        int result = stmte.update(stmtBuilder.getDeleteStatement(selectUser));
+
+        assertThat(1, is(result));
+    }
+
+
+
+    @Test
+    public void testDeleteById() throws Exception {
+        StatementExecutor<User> stmte
+                = StatementExecutor.createStatementExecutor(con, User.class);
+        int result = stmte.update(stmtBuilder.getDeleteByIdStatement(1));
+        assertThat(1, is(result));
+    }
+
+    @Test
+    public void testDeleteByField() throws Exception {
+        StatementExecutor<User> stmte
+                = StatementExecutor.createStatementExecutor(con, User.class);
+        int result = stmte.update(stmtBuilder.getDeleteByFieldStatement("NAME", "taro"));
+        assertThat(0, is( not(result)));
+
+    }
+
 }
