@@ -148,6 +148,16 @@ public class SQLBuilderTest {
         assertThat(expected, is(actual));
     }
 
+    @Test
+    public void testCountByField() {
+        String expected = "SELECT COUNT (*) FROM USER WHERE NAME = ? ;";
+
+        String actual = sqlBuilder.countByField("NAME");
+        System.out.println("Expected :" + expected);
+        System.out.println("Actual   :" + actual);
+        assertThat(expected, is(actual));
+    }
+
     @After
     public void tearDown() throws Exception {
         tableInfo = null;

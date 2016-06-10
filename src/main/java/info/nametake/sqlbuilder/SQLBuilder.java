@@ -123,6 +123,17 @@ public class SQLBuilder {
         return new String(sb);
     }
 
+    public String countByField(String fieldName) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(SELECT)
+                .append(COUNT).append(getRoundBrackets("*")).append(" ")
+                .append(FROM).append(tableInfo.getTableName()).append(" ")
+                .append(WHERE)
+                .append(fieldName).append(" = ? ")
+                .append(END);
+        return new String(sb);
+    }
+
     /**
      * カンマ区切りのフィールド名を取得
      * @return カンマ区切りのフィールドの文字列
