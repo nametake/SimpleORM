@@ -57,26 +57,35 @@ public interface Dao<T> {
     /**
      * モデルをDELETE
      * @param data: DELETEするモデルのインスタンス
-     * @return 変更された行数
+     * @return 削除された行数
      * @throws SQLException
      */
     public int delete(T data) throws SQLException;
 
     /**
-     * 未実装
-     * @param id
-     * @return
+     * 主キーを指定したDELETE文を実行
+     * @param id: 主キー
+     * @return 削除された行数
      * @throws SQLException
      */
     public int deleteById(int id) throws SQLException;
 
     /**
-     *
      * フィールド名と値を指定したDELETE文を実行
      * @param fieldName: カラム名
      * @param value: 値
-     * @return 変更された行数
+     * @return 削除された行数
      * @throws SQLException
      */
     public int deleteByField(String fieldName, Object value) throws SQLException;
+
+    /**
+     * フィールド内で条件に一致した数を数える
+     * @param fieldName: カラム名
+     * @param value: 条件となる値
+     * @return
+     * @throws SQLException
+     */
+    public int countByField(String fieldName, Object value) throws SQLException;
+
 }

@@ -9,12 +9,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-/**
- * Created by nameki-shogo on 2016/05/19.
- */
+
 public class DaoFacotry {
 
-    public static HashMap<Class<?>, Dao<?>> daoCache = new HashMap<>();
+    private static HashMap daoCache = new HashMap();
 
     public static <D extends Dao<?>, T> D createDao(Connection connection, Class<T> clazz) throws AnnotationException, SQLException {
 

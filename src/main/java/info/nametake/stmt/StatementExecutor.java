@@ -12,9 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by nameki-shogo on 2016/05/19.
- */
+
 public class StatementExecutor<T> {
 
     /**

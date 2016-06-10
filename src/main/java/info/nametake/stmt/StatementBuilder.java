@@ -8,9 +8,7 @@ import info.nametake.sqlbuilder.SQLBuilder;
 import java.lang.reflect.Field;
 import java.sql.*;
 
-/**
- * Created by shogo on 2016/05/22.
- */
+
 public class StatementBuilder<T> {
     private Connection connection;
     private TableInfo<T> tableInfo;
