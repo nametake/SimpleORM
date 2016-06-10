@@ -107,6 +107,7 @@ public class StatementExecutor<T> {
                     continue;
                 }
                 String fieldName = dbf.columnName();
+                // TODO:エラー処理が甘い
                 field.set(instance, resultSet.getObject(fieldName));
             }
         } catch (InstantiationException e) {

@@ -54,6 +54,7 @@ public class DaoFacotry {
     }
 
     private static Constructor<?> findConstructor(Class<?> daoClass, Object[] params) {
+        // TODO:何かのエクセプションが出てくるので修正
         for (Constructor<?> constructor : daoClass.getConstructors()) {
             Class<?>[] paramsTypes = constructor.getParameterTypes();
             if (paramsTypes.length == params.length) {
