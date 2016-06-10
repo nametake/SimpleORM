@@ -8,9 +8,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by shogo on 2016/05/22.
- */
+
 public class TableInfo<T> {
     private final Class<T> clazz;
 

@@ -9,9 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-/**
- * Created by nameki-shogo on 2016/05/19.
- */
+
 public class DaoFacotry {
 
     private static HashMap daoCache = new HashMap();

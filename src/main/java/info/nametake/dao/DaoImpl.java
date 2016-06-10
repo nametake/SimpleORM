@@ -9,9 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by shogo on 2016/05/19.
- */
+
 class DaoImpl<T> extends BaseDao<T> {
 
     private StatementBuilder<T> stmtBuilder;

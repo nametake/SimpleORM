@@ -5,9 +5,7 @@ import info.nametake.dao.TableInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by nameki-shogo on 2016/05/19.
- */
+
 public class SQLBuilder {
     private static final String SELECT = "SELECT ";
     private static final String INSERT = "INSERT INTO ";
