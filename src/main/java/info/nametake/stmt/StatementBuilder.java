@@ -74,6 +74,13 @@ public class StatementBuilder<T> {
         return ps;
     }
 
+    public PreparedStatement getCountByFieldStatement(String fieldName, Object value) throws SQLException {
+        String sql = sqlBuilder.countByField(fieldName);
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setObject(1, value);
+        return ps;
+    }
+
     private PreparedStatement setValues(PreparedStatement ps, T data) throws SQLException {
         // loop
         for (Field field : tableInfo.getClazz().getDeclaredFields()) {

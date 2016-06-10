@@ -171,7 +171,13 @@ public class StatementExecutorTest extends BaseDBTest {
                 = StatementExecutor.createStatementExecutor(con, User.class);
         int result = stmte.update(stmtBuilder.getDeleteByFieldStatement("NAME", "taro"));
         assertThat(0, is( not(result)));
-
     }
 
+    @Test
+    public void testCountByField() throws Exception {
+        StatementExecutor<User> stmte
+                = StatementExecutor.createStatementExecutor(con, User.class);
+        List<User> result = stmte.execute(stmtBuilder.getCountByFieldStatement("NAME", "taro"));
+
+    }
 }
