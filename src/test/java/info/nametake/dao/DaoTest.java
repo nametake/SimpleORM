@@ -132,7 +132,12 @@ public class DaoTest extends BaseDBTest {
         assertThat(username, is(user.getName()));
         user = userDao.selectByField(fieldNamePass, password).get(0);
         assertThat(password, is(user.getPassword()));
+    }
 
-
+    @Test
+    public void testCountByField() throws Exception {
+        System.out.println("COUNT By Field");
+        int count = userDao.countByField("NAME", "taro");
+        assertThat(3, is(count));
     }
 }

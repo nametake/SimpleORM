@@ -87,7 +87,8 @@ class DaoImpl<T> extends BaseDao<T> {
 
     @Override
     public int countByField(String fieldName, Object value) throws SQLException {
-        return 0;
+        PreparedStatement ps = stmtBuilder.getCountByFieldStatement(fieldName, value);
+        return stmtExecutor.aggregateExecute(ps);
     }
 
 }
