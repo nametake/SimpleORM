@@ -90,6 +90,14 @@ public class StatementExecutor<T> {
         throw new SQLException();
     }
 
+    public int aggregateExecute(PreparedStatement ps) throws SQLException {
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        throw new SQLException();
+    }
+
     /**
      * 渡されたResultSetの1行をモデルにして返す。
      * @param clazz

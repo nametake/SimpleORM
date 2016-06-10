@@ -18,7 +18,7 @@ public class SQLBuilder {
     private static final String EQ     = " = ";
     private static final String END    = ";";
 
-    private static final String COUNT  = "COUNT ";
+    private static final String COUNT  = "COUNT";
 
     private TableInfo tableInfo;
 

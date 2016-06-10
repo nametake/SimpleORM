@@ -150,7 +150,7 @@ public class SQLBuilderTest {
 
     @Test
     public void testCountByField() {
-        String expected = "SELECT COUNT (*) FROM USER WHERE NAME = ? ;";
+        String expected = "SELECT COUNT(*) FROM USER WHERE NAME = ? ;";
 
         String actual = sqlBuilder.countByField("NAME");
         System.out.println("Expected :" + expected);
